@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/co_layout_toolbar"
+        android:id="@+id/co_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -39,7 +39,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-
                 app:cardBackgroundColor="@color/dark_mode">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -59,10 +58,10 @@
                     app:startIconTint="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
-
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:imeOptions="actionSearch"
@@ -112,7 +111,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_layout_image_temp_city"
+            android:id="@+id/rl_layout_image_temp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_mode"
@@ -147,9 +146,6 @@
                 android:layout_height="140dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-
                 android:layout_marginEnd="20dp"
                 android:src="@drawable/ic_img_clear" />
 
@@ -160,7 +156,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_mode"
-            app:layout_constraintTop_toBottomOf="@id/rl_layout_image_temp_city">
+            app:layout_constraintTop_toBottomOf="@id/rl_layout_image_temp">
 
 
             <com.google.android.material.textview.MaterialTextView
