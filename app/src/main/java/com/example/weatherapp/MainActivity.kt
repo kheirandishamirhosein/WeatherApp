@@ -11,14 +11,14 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.example.weatherapp.databinding.ActivityMainBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +30,10 @@ class MainActivity : AppCompatActivity() {
 
 
         getCurrentLocation()
-
+        //currentWeather.currentWeatherStatus.observe(this) { getCurrentLocation() }
     }
+
+
 
     /***permissions***/
     /*** imps all permissions in fun getCurrentLocation ***/
@@ -59,7 +61,8 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                             //TODO: imp codes and fetch weathers
-
+                                location.latitude.toString()
+                                location.longitude.toString()
                         }
                     }
             } else {
@@ -124,7 +127,6 @@ class MainActivity : AppCompatActivity() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
-
 
 
 }

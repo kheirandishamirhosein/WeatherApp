@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_mode"
-    tools:context=".fragment.MainFragment">
+    tools:context=".MainActivity">
 
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -90,7 +90,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="2023/02/17"
+                android:text="2023/01/10"
                 android:textColor="@color/blue_date_time_"
                 android:textSize="20sp" />
 

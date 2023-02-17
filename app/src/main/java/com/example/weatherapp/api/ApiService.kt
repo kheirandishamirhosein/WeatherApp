@@ -36,15 +36,15 @@ private val retrofit = Retrofit.Builder()
 interface WeatherApi {
 
     @GET("weather")
-    suspend fun getCurrentWeatherData(
+    fun getCurrentWeatherData(
         @Query("let") latitude: String,
         @Query("lon") longitude: String,
         @Query("APPID") api_key: String
     ): Call<WeatherModel>
 
     @GET("weather")
-    suspend fun getCityWeatherData(
-        @Query("city") city: String,
+    fun getCityWeatherData(
+        @Query("q") city: String,
         @Query("APPID") api_key: String
     ): Call<WeatherModel>
 }
