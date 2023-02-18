@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.api.GetApi
 import com.example.weatherapp.models.WeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import kotlinx.coroutines.launch
-import retrofit2.Call
 
-class CurrentWeather : ViewModel() {
-
-    /*
+class CurrentLocation : ViewModel() {
+/*
     private val _currentWeatherStatus = MutableLiveData<WeatherModel?>()
     val currentWeatherStatus: LiveData<WeatherModel?> = _currentWeatherStatus
 
@@ -26,6 +23,7 @@ class CurrentWeather : ViewModel() {
             }
         }
     }
+    */
 
-     */
+
 }

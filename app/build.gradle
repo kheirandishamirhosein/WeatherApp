@@ -47,26 +47,24 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    //material
+    implementation 'com.google.android.material:material:1.9.0-alpha01'
     //retrofit and moshi
     implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
     //moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //HttpLoggingInterceptor
     implementation "com.squareup.okhttp3:logging-interceptor:4.2.1"
     //viewModelScope
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     //LifecycleScope
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    // navigation and fragment
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     //location
     implementation 'com.google.android.gms:play-services-location:21.0.1'
-    // navigation For Kotlin
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
+
 
 
 

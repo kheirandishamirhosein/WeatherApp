@@ -8,16 +8,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 
 //moshi
+/*
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
-
+*/
+/*
 //retrofit
 private val retrofit = Retrofit.Builder()
     .client(
@@ -27,11 +31,11 @@ private val retrofit = Retrofit.Builder()
             })
             .build()
     )
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .addConverterFactory(GsonConverterFactory.create())
     .baseUrl(UrlKeyApi.BASE_URL)
     .build()
-
-
+ */
+/*
 // interface for get Api
 interface WeatherApi {
 
@@ -48,11 +52,26 @@ interface WeatherApi {
         @Query("APPID") api_key: String
     ): Call<WeatherModel>
 }
-
+*/
+/*
 //object api for get retrofit
 object GetApi {
     val retrofitService: WeatherApi by lazy {
         retrofit.create(WeatherApi::class.java)
     }
 }
+ */
 
+object Api {
+    private var retrofit: Retrofit? = null
+    fun getApiInterface(): ApiInterface? {
+        if (retrofit == null) {
+            retrofit =
+                Retrofit.Builder()
+                    .baseUrl(UrlKeyApi.BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+        }
+        return retrofit!!.create(ApiInterface::class.java)
+    }
+}

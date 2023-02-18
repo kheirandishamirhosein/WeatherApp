@@ -8,21 +8,23 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/md_pc_progress_Loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/co_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/md_pc_progress_Loading"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="visible"
+            app:indicatorColor="@color/blue_date_time_"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/md_cv_toolbar"
             android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                     app:startIconTint="@color/white">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edit_text"
+                        android:id="@+id/text_field_edit"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
