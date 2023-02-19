@@ -15,7 +15,10 @@ object KelvinToCelsius {
 }
 
 object CelsiusToFahrenheit {
-    fun celsiusToFahrenheit(temp: Double) {
-        KelvinToCelsius.kelvinToCelsius(temp).times(1.8).plus(32).roundToInt()
+    fun celsiusToFahrenheit(temp: Double): Double {
+        var celsius = temp
+        celsius = celsius.minus(273)
+        val kelvin = celsius.toBigDecimal().setScale(1, RoundingMode.UP).toDouble()
+        return kelvin.times(1.8).plus(32).roundToInt().toDouble()
     }
 }

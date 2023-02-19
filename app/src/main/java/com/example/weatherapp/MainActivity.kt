@@ -36,25 +36,30 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.coLayout.visibility = View.GONE
         binding.mdPcProgressLoading.visibility = View.VISIBLE
+        //binding.ProgressBar.visibility = View.VISIBLE
         getCurrentLocation()
 
         binding.textFieldEdit.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //TODO: imp codes city edit text
                 binding.mdPcProgressLoading.visibility = View.VISIBLE
-                binding.coLayout.visibility = View.VISIBLE
+                //binding.ProgressBar.visibility = View.VISIBLE
+                binding.coLayout.visibility = View.GONE
                 //(binding.textFieldEdit.text.toString())
                 //(binding.mdTvCity.text.toString())
+                //getCityWeather(binding.textFieldEdit.text.toString())
                 getCityWeather(binding.textFieldEdit.text.toString())
                 getCityWeather(binding.mdTvCity.text.toString())
                 val view = this.currentFocus
                 if (view != null) {
                     val imm: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(view.windowToken, 0)
-                    binding.textFieldEdit.clearFocus()
+                    //binding.textFieldEdit.clearFocus()
+                    binding.mdTfGetCityName.clearFocus()
                 }
                 true
             } else false
@@ -63,12 +68,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCityWeather(city: String) {
-        binding.mdPcProgressLoading.visibility = View.VISIBLE
+        //binding.mdPcProgressLoading.visibility = View.VISIBLE
+        binding.coLayout.visibility = View.VISIBLE
         //GetApi.retrofitService.getCityWeatherData
         Api.getApiInterface()?.getCityWeatherData(city, UrlKeyApi.KEY)?.enqueue(object :
             Callback<WeatherModel> {
             override fun onResponse(call: Call<WeatherModel>, response: Response<WeatherModel>) {
-                setData(response.body())
+                if (response.isSuccessful) {
+
+                    setData(response.body())
+                }
             }
 
             override fun onFailure(call: Call<WeatherModel>, t: Throwable) {
@@ -80,6 +89,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
         binding.mdPcProgressLoading.visibility = View.VISIBLE
+        //binding.ProgressBar.visibility = View.VISIBLE
+        binding.coLayout.visibility = View.VISIBLE
         //GetApi.retrofitService.
         Api.getApiInterface()?.getCurrentWeatherData(latitude, longitude, UrlKeyApi.KEY)?.enqueue(object :
             Callback<WeatherModel> {
@@ -105,18 +116,20 @@ class MainActivity : AppCompatActivity() {
         //TODO: city
         binding.mdTvCity.text = weatherModel.name
         binding.mdTvWeatherType.text = weatherModel.weather[0].main
-        binding.mdTvFeelsLike.text = "" + KelvinToCelsius.kelvinToCelsius(weatherModel.main.feels_like) + ""
-        binding.mdTvDayMaxTemp.text = "Day" + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_max) + ""
-        binding.mdTvDayMinTemp.text = "Night" + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_min) + ""
+        binding.mdTvFeelsLike.text = "Feels Like " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.feels_like) + ""
+        binding.mdTvDayMaxTemp.text = "min " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_max) + ""
+        binding.mdTvDayMinTemp.text = "max " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_min) + ""
         //
         binding.mdTvNumSunrise.text = Timestamp.timestampToLocalDate(weatherModel.sys.sunrise.toLong())
         binding.mdTvNumSunset.text = Timestamp.timestampToLocalDate(weatherModel.sys.sunset.toLong())
         binding.mdTvNumPressure.text = weatherModel.main.pressure.toString()
         binding.mdTvNumHumidity.text = weatherModel.main.humidity.toString() + "%"
-        binding.mdTvNumWindSpeed.text = weatherModel.wind.speed.toString() + "m/s"
-        binding.mdTvNumFahrenheit.text = "" + CelsiusToFahrenheit.celsiusToFahrenheit(weatherModel.main.temp) + "F"
+        binding.mdTvNumWindSpeed.text = weatherModel.wind.speed.toString() + " m/s"
+        binding.mdTvNumFahrenheit.text =
+            "" + (CelsiusToFahrenheit.celsiusToFahrenheit(weatherModel.main.temp)) + " F"
         //
         binding.mdTfGetCityName.editText?.setText(weatherModel.name)
+        //binding.getCityName.setText(weatherModel.name)
         //
         updateImageWeather(weatherModel.weather[0].id)
     }
@@ -146,13 +159,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.mdPcProgressLoading.visibility = View.GONE
+        //binding.ProgressBar.visibility = View.VISIBLE
         binding.coLayout.visibility = View.VISIBLE
-    }
-
-    fun bindProgressSizeToViewWidth(circularProgressIndicator: CircularProgressIndicator, view: View?) {
-        view!!.post {
-            circularProgressIndicator.indicatorSize = view.measuredWidth
-        }
     }
 
     /***permissions***/
@@ -181,6 +189,8 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                             //TODO: imp codes and fetch location weathers
+                            //binding.ProgressBar.visibility = View.VISIBLE
+                            binding.mdPcProgressLoading.visibility = View.VISIBLE
                             fetchCurrentLocationWeather(
                             location.latitude.toString(),
                             location.longitude.toString()
