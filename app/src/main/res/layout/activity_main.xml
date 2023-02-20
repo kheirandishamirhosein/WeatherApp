@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_mode"
+    android:background="@color/dark_test"
     tools:context=".MainActivity">
 
 
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/md_pc_progress_Loading"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:visibility="gone"
         app:indicatorColor="@color/blue_date_time_"
+        app:trackColor="@color/purple_500"
+        android:indeterminate="true"
         android:layout_gravity="center_horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,8 +47,8 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/md_cv_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:cardBackgroundColor="@color/dark_mode"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/dark_test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -54,11 +56,11 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/md_cv_searchView"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                app:cardBackgroundColor="@color/dark_mode">
+                app:cardBackgroundColor="@color/dark_test">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/md_tf_get_city_name"
@@ -98,7 +100,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:background="@color/dark_mode"
+            android:background="@color/dark_test"
             app:layout_constraintTop_toBottomOf="@id/md_cv_toolbar">
 
             <com.google.android.material.textview.MaterialTextView
@@ -134,7 +136,6 @@
             android:id="@+id/rl_layout_image_temp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_mode"
             app:layout_constraintTop_toBottomOf="@id/rl_layout_date_time">
 
             <com.google.android.material.textview.MaterialTextView
@@ -145,9 +146,9 @@
                 android:layout_centerInParent="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
-                android:text="00"
+                android:text="00.0"
                 android:textColor="@color/purple_200"
                 android:textSize="70sp" />
 
@@ -155,7 +156,6 @@
                 android:id="@+id/iv_temp_num_circle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@id/md_tv_temp"
@@ -177,7 +177,6 @@
             android:id="@+id/rl_layout_city_weather_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_mode"
             app:layout_constraintTop_toBottomOf="@id/rl_layout_image_temp">
 
 
@@ -212,7 +211,6 @@
             android:id="@+id/rl_layout_min_max_feels"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark_mode"
             app:layout_constraintTop_toBottomOf="@id/rl_layout_city_weather_type">
 
 
@@ -228,7 +226,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="feels like"
                 android:textColor="@color/green"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/md_tv_day_max_temp"
@@ -242,7 +240,7 @@
                 android:layout_toStartOf="@id/md_tv_day_min_temp"
                 android:text="Max 00"
                 android:textColor="@color/red"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/md_tv_day_min_temp"
@@ -256,7 +254,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="Min 00"
                 android:textColor="@color/cold"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </RelativeLayout>
 

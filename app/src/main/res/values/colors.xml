@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_mode">#192042</color>
     <color name="dark_mode2">#1C2964</color>
+    <color name="dark_test">#080D2B</color>
     <color name="gray">#808080</color>
     <color name="gray_date_time">#7B7D7D</color>
     <color name="blue_date_time_">#05FBEC</color>
