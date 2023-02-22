@@ -1,10 +1,11 @@
 package com.example.weatherapp.models
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Weather(
-    @SerializedName("description") val description: String,
-    @SerializedName("icon") val icon: String,
-    @SerializedName("id") val id: Int,
-    @SerializedName("main") val main: String
+    @Json(name = "description") val description: String,
+    @Json(name = "icon") val icon: String,
+    @Json(name = "id") val id: Int,
+    @Json(name = "main") val main: String
 )

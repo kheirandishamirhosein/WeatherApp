@@ -1,8 +1,9 @@
 package com.example.weatherapp.models
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Coord(
-    @SerializedName("lat")val lat: Double,
-    @SerializedName("lon")val lon: Double
+    @Json(name = "lat") val lat: Double,
+    @Json(name = "lon") val lon: Double
 )

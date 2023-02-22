@@ -1,20 +1,21 @@
 package com.example.weatherapp.models
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class WeatherModel(
-    @SerializedName("base") val base: String,
-    @SerializedName("clouds") val clouds: Clouds,
-    @SerializedName("cod") val cod: Int,
-    @SerializedName("coord") val coord: Coord,
-    @SerializedName("dt") val dt: Int,
-    @SerializedName("id") val id: Int,
-    @SerializedName("main") val main: Main,
-    @SerializedName("name") val name: String,
-    @SerializedName("rain") val rain: Rain,
-    @SerializedName("sys") val sys: Sys,
-    @SerializedName("timezone") val timezone: Int,
-    @SerializedName("visibility") val visibility: Int,
-    @SerializedName("weather") val weather: List<Weather>,
-    @SerializedName("wind") val wind: Wind
+    @Json(name = "base") val base: String,
+    @Json(name = "clouds") val clouds: Clouds,
+    @Json(name = "cod") val cod: Int,
+    @Json(name = "coord") val coord: Coord,
+    @Json(name = "dt") val dt: Int,
+    @Json(name = "id") val id: Int,
+    @Json(name = "main") val main: Main,
+    @Json(name = "name") val name: String,
+    @Json(name = "rain") val rain: Rain,
+    @Json(name = "sys") val sys: Sys,
+    @Json(name = "timezone") val timezone: Int,
+    @Json(name = "visibility") val visibility: Int,
+    @Json(name = "weather") val weather: List<Weather>,
+    @Json(name = "wind") val wind: Wind
 )

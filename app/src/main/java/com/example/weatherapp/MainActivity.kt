@@ -15,12 +15,15 @@ import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
-import com.example.weatherapp.api.Api
+import androidx.lifecycle.Observer
 import com.example.weatherapp.data.*
 import com.example.weatherapp.databinding.ActivityMainBinding
 import com.example.weatherapp.models.WeatherModel
 import com.example.weatherapp.util.UrlKeyApi
+import com.example.weatherapp.viewmodel.CityWeather
+import com.example.weatherapp.viewmodel.CurrentLocation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import retrofit2.Call
@@ -31,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val cityWeatherViewModel: CityWeather by viewModels()
+    private val currentLocationViewModel: CurrentLocation by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 //TODO: imp codes city edit text
                 getCityWeather(binding.textFieldEdit.text.toString().trim())
-
                 val view = this.currentFocus
                 if (view != null) {
                     val imm: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
@@ -61,8 +65,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
         binding.mdPcProgressLoading.visibility = View.VISIBLE
-        //binding.coLayout.visibility = View.VISIBLE
+        binding.coLayout.visibility = View.VISIBLE
+         currentLocationViewModel.fetchCurrentLocationWeather(latitude,longitude)
+         currentLocationViewModel.currentWeatherStatus.observe(this) { setData(it) }
         //GetApi.retrofitService.
+       /*
         Api.getApiInterface()?.getCurrentWeatherData(latitude, longitude, UrlKeyApi.KEY)?.enqueue(object :
             Callback<WeatherModel> {
             override fun onResponse(call: Call<WeatherModel>, response: Response<WeatherModel>) {
@@ -76,12 +83,18 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        */
+
     }
 
     private fun getCityWeather(city: String) {
         binding.mdPcProgressLoading.visibility = View.VISIBLE
+        cityWeatherViewModel.fetchCityWeather(city)
+        cityWeatherViewModel.cityWeatherStatus.observe(this) { setData(it) }
         //binding.coLayout.visibility = View.VISIBLE
         //GetApi.retrofitService.getCityWeatherData
+        /*
         Api.getApiInterface()?.getCityWeatherData(city, UrlKeyApi.KEY)?.enqueue(object :
             Callback<WeatherModel> {
             override fun onResponse(call: Call<WeatherModel>, response: Response<WeatherModel>) {
@@ -93,6 +106,9 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+         */
+
     }
 
 

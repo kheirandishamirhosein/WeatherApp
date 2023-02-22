@@ -64,6 +64,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
     //location
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    //viewModel
+    implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.activity:activity-ktx:1.6.1'
 
 
 

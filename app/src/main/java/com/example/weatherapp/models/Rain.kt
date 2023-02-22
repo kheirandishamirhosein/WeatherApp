@@ -1,7 +1,8 @@
 package com.example.weatherapp.models
 
 import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Rain(
-    @SerializedName("`1h`")val `1h`: Double
+    @Json(name = "`1h`") val `1h`: Double
 )
