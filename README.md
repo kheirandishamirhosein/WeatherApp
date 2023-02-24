@@ -9,7 +9,7 @@ It is https://openweathermap.org/.
 ---------------
 Home screen 
 
-![Screenshot_20230224_181119_Weather App](https://user-images.githubusercontent.com/115555417/221221850-1e2f36e7-a023-4b5b-af7c-c42aac3800d4.jpg)
+![Screenshot_20230224_192042_Weather App](https://user-images.githubusercontent.com/115555417/221226166-f860b28d-59b5-4ac0-9ae6-4c6413bd7f34.jpg)
 ---------------
 I used the following topics to make it :
 1. Material Design
