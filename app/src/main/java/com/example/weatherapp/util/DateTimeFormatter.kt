@@ -1,4 +1,4 @@
-package com.example.weatherapp.data
+package com.example.weatherapp.util
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat

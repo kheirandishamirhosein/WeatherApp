@@ -1,4 +1,4 @@
-package com.example.weatherapp.data
+package com.example.weatherapp.util
 
 import java.math.RoundingMode
 import kotlin.math.roundToInt

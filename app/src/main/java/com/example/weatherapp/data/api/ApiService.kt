@@ -1,20 +1,15 @@
-package com.example.weatherapp.api
+package com.example.weatherapp.data.api
 
-import com.example.weatherapp.models.WeatherModel
+import com.example.weatherapp.data.model.WeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
-
 
 //moshi
 private val moshi = Moshi.Builder()
@@ -39,18 +34,17 @@ interface WeatherApi {
 
     @GET("weather")
     suspend fun getCurrentWeatherData(
-        @Query("let") latitude: String,
+        @Query("lat") latitude: String,
         @Query("lon") longitude: String,
         @Query("APPID") api_key: String
-    ): Response<WeatherModel>
+    ): WeatherModel
 
     @GET("weather")
     suspend fun getCityWeatherData(
         @Query("q") city: String,
         @Query("APPID") api_key: String
-    ): Response<WeatherModel>
+    ): WeatherModel
 }
-
 
 //object api for get retrofit
 object GetApi {
@@ -59,22 +53,5 @@ object GetApi {
     }
 }
 
-
-/*
-object Api {
-    private var retrofit: Retrofit? = null
-    fun getApiInterface(): ApiInterface? {
-        if (retrofit == null) {
-            retrofit =
-                Retrofit.Builder()
-                    .baseUrl(UrlKeyApi.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-        }
-        return retrofit!!.create(ApiInterface::class.java)
-    }
-}
-
- */
 
 

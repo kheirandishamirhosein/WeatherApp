@@ -1,6 +1,5 @@
-package com.example.weatherapp.models
+package com.example.weatherapp.data.model
 
-import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class Clouds(
