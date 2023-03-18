@@ -9,7 +9,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/bar_forecast_5_day"
-        android:title="Forecast 5 Day"
+        android:title="5 Day Forecast"
         android:icon="@drawable/ic_bar_hourly_forecast_4_days"
         app:showAsAction="ifRoom" />
 

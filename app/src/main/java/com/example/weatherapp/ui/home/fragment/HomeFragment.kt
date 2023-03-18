@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
         return view
     }
 
+
     @SuppressLint("SetTextI18n")
     fun setDataView(weatherModel: WeatherModel?) = with(binding) {
         mdTvDate.text = DateFormatter.currentDate
