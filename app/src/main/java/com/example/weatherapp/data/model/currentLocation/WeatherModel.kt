@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model
+package com.example.weatherapp.data.model.currentLocation
 
 import com.squareup.moshi.Json
 
@@ -16,4 +16,5 @@ data class WeatherModel(
     @Json(name = "id") val id: Int,
     @Json(name = "name") val name: String,
     @Json(name = "cod") val cod: Int,
+    //@Json(name = "dt_txt") val dtTxt: String,
 )

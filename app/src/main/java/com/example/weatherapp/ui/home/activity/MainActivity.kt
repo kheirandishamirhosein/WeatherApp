@@ -1,7 +1,6 @@
 package com.example.weatherapp.ui.home.activity
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,26 +9,28 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import com.example.weatherapp.R
-import com.example.weatherapp.data.*
-import com.example.weatherapp.data.model.WeatherModel
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.ui.fiveforcast.fragment.FiveDayForecastFragment
+import com.example.weatherapp.ui.home.fragment.HomeFragment
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
-import com.example.weatherapp.util.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class MainActivity : AppCompatActivity() {
 
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val weatherApiViewModel: WeatherApiViewModel by viewModels()
+    private val homeFragment = HomeFragment()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,87 +38,40 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        binding.coLayout.visibility = View.GONE
-        //binding.mdPcProgressLoading.visibility = View.VISIBLE
         getCurrentLocation()
-        binding.textFieldEdit.setOnEditorActionListener { _, actionId, _ ->
-            binding.mdPcProgressLoading.visibility = View.VISIBLE
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                //TODO: imp codes city edit text
-                getCityWeather(binding.textFieldEdit.text.toString().trim())
-                val view = this.currentFocus
-                if (view != null) {
-                    val imm: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                    imm.hideSoftInputFromWindow(view.windowToken, 0)
-                    binding.textFieldEdit.clearFocus()
-                }
-                true
-            } else false
-        }
 
+        //use nav host fragment
+        /*       val navHostFragment = supportFragmentManager
+                   .findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+               navController = navHostFragment.navController
+               NavigationUI.setupActionBarWithNavController(this, navController)
+       */
+
+        loadFragment(homeFragment)
+        //use bottom navigation
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.bar_home -> loadFragment(HomeFragment())
+                R.id.bar_forecast_5_day -> loadFragment(FiveDayForecastFragment())
+            }
+            true
+        }
     }
 
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.commit()
+    }
+
+    //fetch Current Location Weather latitude , longitude
     private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
+        //TODO: visibility is gone
         binding.mdPcProgressLoading.visibility = View.VISIBLE
         weatherApiViewModel.fetchCurrentLocationWeather(latitude, longitude)
-        weatherApiViewModel.currentWeatherStatus.observe(this) { setData(it) }
+        weatherApiViewModel.currentWeatherStatus.observe(this) { homeFragment.setDataView(it) }
     }
 
-    private fun getCityWeather(city: String) {
-        binding.mdPcProgressLoading.visibility = View.VISIBLE
-        weatherApiViewModel.fetchCityWeather(city)
-        weatherApiViewModel.cityWeatherStatus.observe(this) { setData(it) }
-
-        //Toast.makeText(this,"City Not Found",Toast.LENGTH_SHORT).show()
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun setData(weatherModel: WeatherModel?) = with(binding) {
-        mdTvDate.text = DateFormatter.currentDate
-        mdTvTime.text = TimeFormatter.currentTime
-        mdTvTemp.text = "" + KelvinToCelsius.kelvinToCelsius(weatherModel!!.main.temp) + ""
-        mdTvCity.text = weatherModel.name
-        mdTvWeatherType.text = weatherModel.weather[0].main
-        mdTvFeelsLike.text = "Feels Like " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.feels_like) + ""
-        mdTvDayMaxTemp.text = "max " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_max) + ""
-        mdTvDayMinTemp.text = "min " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_min) + ""
-        mdTvNumSunrise.text = Timestamp.timestampToLocalDate(weatherModel.sys.sunrise.toLong())
-        mdTvNumSunset.text = Timestamp.timestampToLocalDate(weatherModel.sys.sunset.toLong())
-        mdTvNumPressure.text = weatherModel.main.pressure.toString() + " P"
-        mdTvNumHumidity.text = weatherModel.main.humidity.toString() + "%"
-        mdTvNumWindSpeed.text = weatherModel.wind.speed.toString() + " m/s"
-        mdTvNumFahrenheit.text = "" + (CelsiusToFahrenheit.celsiusToFahrenheit(weatherModel.main.temp)) + " F"
-        textFieldEdit.setText(weatherModel.name)
-        updateImageWeather(weatherModel.weather[0].id)
-    }
-
-    private fun updateImageWeather(id: Int) = with(binding) {
-        when (id) {
-            in 200..232 -> {
-                ivImages.setImageResource(R.drawable.ic_thunderstorm)
-            }
-            in 300..321 -> {
-                ivImages.setImageResource(R.drawable.ic_drizzle_)
-            }
-            in 500..531 -> {
-                ivImages.setImageResource(R.drawable.ic_rain)
-            }
-            in 600..622 -> {
-                ivImages.setImageResource(R.drawable.ic_snow)
-            }
-            in 701..781 -> {
-                ivImages.setImageResource(R.drawable.ic_atmosphere)
-            }
-            800 -> {
-                ivImages.setImageResource(R.drawable.ic_img_clear)
-            }
-            in 801..804 -> {
-                ivImages.setImageResource(R.drawable.ic_clouds)
-            }
-        }
-        mdPcProgressLoading.visibility = View.GONE
-        coLayout.visibility = View.VISIBLE
-    }
 
     /***permissions***/
     /*** imps all permissions in fun getCurrentLocation ***/
@@ -145,12 +99,10 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
                             //TODO: imp codes and fetch location weathers
-                            //binding.mdPcProgressLoading.visibility = View.VISIBLE
                             fetchCurrentLocationWeather(
                                 location.latitude.toString(),
                                 location.longitude.toString()
                             )
-
                         }
                     }
             } else {
@@ -185,7 +137,6 @@ class MainActivity : AppCompatActivity() {
     private fun requestPermissions() {
         ActivityCompat.requestPermissions(
             this, arrayOf(
-
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ),

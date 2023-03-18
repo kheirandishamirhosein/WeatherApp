@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model
+package com.example.weatherapp.data.model.currentLocation
 
 import com.squareup.moshi.Json
 

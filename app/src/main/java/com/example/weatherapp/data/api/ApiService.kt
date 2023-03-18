@@ -1,6 +1,8 @@
 package com.example.weatherapp.data.api
 
-import com.example.weatherapp.data.model.WeatherModel
+import com.example.weatherapp.data.model.currentLocation.WeatherModel
+import com.example.weatherapp.data.model.forecastLocation.FiveForecastList
+import com.example.weatherapp.data.model.forecastLocation.FiveForecastWeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -10,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 //moshi
 private val moshi = Moshi.Builder()
@@ -23,6 +26,8 @@ private val retrofit = Retrofit.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
+            .connectTimeout(30,TimeUnit.SECONDS) // connect timeout
+            .readTimeout(30,TimeUnit.SECONDS) // socket timeout
             .build()
     )
     .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -44,6 +49,13 @@ interface WeatherApi {
         @Query("q") city: String,
         @Query("APPID") api_key: String
     ): WeatherModel
+
+    @GET("forecast")
+    suspend fun getFiveDayForecastWeatherData(
+        @Query("lat") latitude: String,
+        @Query("lon") longitude: String,
+        @Query("APPID") api_key: String
+    ): FiveForecastWeatherModel
 }
 
 //object api for get retrofit
@@ -52,6 +64,3 @@ object GetApi {
         retrofit.create(WeatherApi::class.java)
     }
 }
-
-
-

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/md_cv_forecast_5_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        app:cardBackgroundColor="@color/dark_mode2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_layout_forecast_5_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2022-08-30 15:00:00"
+                android:textColor="@color/blue_app_bar"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_temp_forecast_5_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="27.5"
+                android:textColor="@color/purple_200"
+                android:layout_alignParentStart="true"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="10dp"
+                android:paddingBottom="30dp"/>
+
+            <ImageView
+                android:id="@+id/iv_temp_num_circle"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_toEndOf="@id/tv_temp_forecast_5_day"
+                android:src="@drawable/ic_temp_num_circle" />
+
+            <ImageView
+                android:id="@+id/iv_images_forecast_5_day"
+                android:layout_width="140dp"
+                android:layout_height="100dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:layout_below="@id/tv_date_time"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginStart="5dp"
+                android:src="@drawable/ic_img_clear" />
+
+            <TextView
+                android:id="@+id/tv_weather_type_forecast_5_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/tv_temp_forecast_5_day"
+                android:text="Clear"
+                android:textColor="@color/pink"
+                android:textSize="20sp"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/tv_internal_parameter_forecast_5_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/tv_weather_type_forecast_5_day"
+                android:text="2.15"
+                android:textColor="@color/green"
+                android:textSize="15sp"
+                android:layout_marginTop="7dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

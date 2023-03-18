@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.api.GetApi
-import com.example.weatherapp.data.model.WeatherModel
+import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import kotlinx.coroutines.launch
 

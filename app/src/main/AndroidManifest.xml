@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Always include this permission -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- Required only when requesting background location access on
-     Android 10 (API level 29) and higher. -->
+    <!--
+ Required only when requesting background location access on
+     Android 10 (API level 29) and higher.
+    -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -21,6 +20,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeatherApp"
         tools:targetApi="31">
+        <!--
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu"
+        -->
+
         <activity
             android:name=".ui.home.activity.MainActivity"
             android:exported="true">
