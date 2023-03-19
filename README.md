@@ -9,7 +9,14 @@ It is https://openweathermap.org/.
 ---------------
 Home screen 
 
-![Screenshot_20230224_192042_Weather App](https://user-images.githubusercontent.com/115555417/221226166-f860b28d-59b5-4ac0-9ae6-4c6413bd7f34.jpg)
+![Home_Weather App](https://user-images.githubusercontent.com/115555417/226141662-e17545dc-1059-4d3a-b54d-14b9ae10e996.jpg)
+
+
+
+5 day / 3 hour forecast screen
+
+![5 Day Forecast_Weather App](https://user-images.githubusercontent.com/115555417/226141708-8400b6c3-4474-4019-abe3-6c467a1e9f8d.jpg)
+
 ---------------
 I used the following topics to make it :
 1. Material Design
