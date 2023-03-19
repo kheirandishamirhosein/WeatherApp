@@ -23,21 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!--
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment_container"
-        android:name="com.example.weatherapp.ui.home.fragment.HomeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:defaultNavHost="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout = "@layout/fragment_home"
-        app:navGraph="@navigation/navigation_graph"/>
-    -->
-
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

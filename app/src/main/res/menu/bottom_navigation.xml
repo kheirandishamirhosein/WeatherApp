@@ -10,8 +10,12 @@
     <item
         android:id="@+id/bar_forecast_5_day"
         android:title="5 Day Forecast"
-        android:icon="@drawable/ic_bar_hourly_forecast_4_days"
+        android:icon="@drawable/ic_bar_5_day_forecast"
         app:showAsAction="ifRoom" />
-
+    <item
+        android:id="@+id/bar_air_pollution"
+        android:title="Air Pollution"
+        android:icon="@drawable/ic_air_pollution"
+        app:showAsAction="ifRoom" />
 
 </menu>

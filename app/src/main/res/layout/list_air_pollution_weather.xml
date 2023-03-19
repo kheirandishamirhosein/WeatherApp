@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/md_cv_air_pollution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        app:cardBackgroundColor="@color/dark_mode2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_layout_forecast_5_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/md_pc_circle_diagram_so2"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:max="350"
+                app:indicatorColor="@color/blue_app_bar"
+                />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

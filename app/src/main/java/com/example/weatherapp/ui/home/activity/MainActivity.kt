@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation()
+        // use img in bottom navigation
+        //binding.bottomNavigation.itemIconTintList = null;
 
         //use nav host fragment
         /*       val navHostFragment = supportFragmentManager

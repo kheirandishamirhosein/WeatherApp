@@ -1,7 +1,6 @@
 package com.example.weatherapp.data.api
 
 import com.example.weatherapp.data.model.currentLocation.WeatherModel
-import com.example.weatherapp.data.model.forecastLocation.FiveForecastList
 import com.example.weatherapp.data.model.forecastLocation.FiveForecastWeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import com.squareup.moshi.Moshi
@@ -26,8 +25,8 @@ private val retrofit = Retrofit.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .connectTimeout(30,TimeUnit.SECONDS) // connect timeout
-            .readTimeout(30,TimeUnit.SECONDS) // socket timeout
+            .connectTimeout(30, TimeUnit.SECONDS) // connect timeout
+            .readTimeout(30, TimeUnit.SECONDS) // socket timeout
             .build()
     )
     .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -56,6 +55,13 @@ interface WeatherApi {
         @Query("lon") longitude: String,
         @Query("APPID") api_key: String
     ): FiveForecastWeatherModel
+
+    @GET("air_pollution")
+    suspend fun getAirPollutionWeatherData(
+        @Query("lat") latitude: String,
+        @Query("lon") longitude: String,
+        @Query("APPID") api_key: String
+    ): WeatherModel
 }
 
 //object api for get retrofit
