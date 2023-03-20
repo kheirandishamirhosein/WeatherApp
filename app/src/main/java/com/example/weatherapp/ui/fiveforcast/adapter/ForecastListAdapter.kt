@@ -24,20 +24,17 @@ class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastVie
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
-        Log.d("sdsdsd", "run onCreateViewHolder")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.list_five_day_forecast, parent, false)
         return ForecastViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        Log.d("sdsdsd", "run onBindViewHolder")
         val item = itemWeatherList[position]
         holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        Log.d("sdsdsd", "run getItemCount")
         return itemWeatherList.size
     }
 

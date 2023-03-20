@@ -1,5 +1,6 @@
 package com.example.weatherapp.data.api
 
+import com.example.weatherapp.data.model.airPollution.AirPollution
 import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.data.model.forecastLocation.FiveForecastWeatherModel
 import com.example.weatherapp.util.UrlKeyApi
@@ -61,7 +62,7 @@ interface WeatherApi {
         @Query("lat") latitude: String,
         @Query("lon") longitude: String,
         @Query("APPID") api_key: String
-    ): WeatherModel
+    ): AirPollution
 }
 
 //object api for get retrofit

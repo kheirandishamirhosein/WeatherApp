@@ -28,4 +28,13 @@
             android:id="@+id/action_fiveDayForecastFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
     </fragment>
+    <fragment
+        android:id="@+id/airPollutionFragment"
+        android:name="com.example.weatherapp.ui.airPollution.fragment.AirPollutionFragment"
+        android:label="fragment_air_pollution"
+        tools:layout="@layout/fragment_air_pollution" >
+        <action
+            android:id="@+id/action_airPollutionFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
 </navigation>

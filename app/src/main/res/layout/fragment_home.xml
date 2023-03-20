@@ -169,14 +169,17 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/md_tv_city"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerInParent="true"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit ="marquee_forever"
                 android:layout_marginStart="20dp"
-                android:text="City"
+                android:text="Astaneh_ye Ashrafiyeh"
                 android:textColor="@color/pink"
-                android:textSize="30sp" />
+                android:textSize="20sp" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/md_tv_weather_type"
@@ -186,7 +189,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                android:text="Clear"
+                android:text="Thunderstorm"
                 android:textColor="@color/purple_200"
                 android:textSize="20sp" />
 

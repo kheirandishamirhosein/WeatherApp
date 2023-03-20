@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import com.example.weatherapp.R
 import com.example.weatherapp.databinding.ActivityMainBinding
+import com.example.weatherapp.ui.airPollution.fragment.AirPollutionFragment
 import com.example.weatherapp.ui.fiveforcast.fragment.FiveDayForecastFragment
 import com.example.weatherapp.ui.home.fragment.HomeFragment
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val weatherApiViewModel: WeatherApiViewModel by viewModels()
     private val homeFragment = HomeFragment()
-    private lateinit var navController: NavController
+    //private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +40,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getCurrentLocation()
-        // use img in bottom navigation
-        //binding.bottomNavigation.itemIconTintList = null;
 
         //use nav host fragment
         /*       val navHostFragment = supportFragmentManager
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.bar_home -> loadFragment(HomeFragment())
                 R.id.bar_forecast_5_day -> loadFragment(FiveDayForecastFragment())
+                R.id.bar_air_pollution -> loadFragment(AirPollutionFragment())
             }
             true
         }

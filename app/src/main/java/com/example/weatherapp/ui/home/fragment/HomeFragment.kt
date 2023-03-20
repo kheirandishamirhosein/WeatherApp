@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
         mdTvTime.text = TimeFormatter.currentTime
         mdTvTemp.text = "" + KelvinToCelsius.kelvinToCelsius(weatherModel!!.main.temp) + ""
         mdTvCity.text = weatherModel.name
+        mdTvCity.isSelected = true
         mdTvWeatherType.text = weatherModel.weather[0].main
         mdTvFeelsLike.text = "Feels Like " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.feels_like) + ""
         mdTvDayMaxTemp.text = "max " + KelvinToCelsius.kelvinToCelsius(weatherModel.main.temp_max) + ""
