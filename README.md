@@ -29,3 +29,4 @@ I used the following topics to make it :
 Items
 1. home item (search all citys and current location)
 2. 5 day 3 hour forecast data in current location
+3. air pollution (coming soon...)
