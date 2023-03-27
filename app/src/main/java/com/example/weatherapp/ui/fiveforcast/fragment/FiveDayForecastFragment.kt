@@ -51,7 +51,6 @@ class FiveDayForecastFragment : Fragment() {
 
     // bind recyclerview
     private fun bindRecyclerview() = with(binding) {
-
         forecast5DayRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         fiveDayForecastListAdapter = ForecastListAdapter()
         forecast5DayRecyclerview.adapter = fiveDayForecastListAdapter
@@ -59,10 +58,10 @@ class FiveDayForecastFragment : Fragment() {
 
     // observe viewModel
     private fun fetchCurrentLocationFiveDayForecastWeather(latitude: String, longitude: String) = with(binding) {
-        binding.mdPcProgressLoadingForecast5Day.visibility = View.VISIBLE
+        mdPcProgressLoadingForecast5Day.visibility = View.VISIBLE
         fiveDayForecastWeatherApiViewModel.fetchFiveDayForecastWeatherData(latitude, longitude)
         fiveDayForecastWeatherApiViewModel.fiveDayForecastStatus.observe(viewLifecycleOwner) {
-            binding.mdPcProgressLoadingForecast5Day.visibility = View.GONE
+            mdPcProgressLoadingForecast5Day.visibility = View.GONE
             fiveDayForecastListAdapter.setItem(it.list)
         }
     }

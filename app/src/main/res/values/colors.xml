@@ -17,4 +17,7 @@
     <color name="red">#FB3905 </color>
     <color name="cold">#05BFFB</color>
     <color name="green">#10FB05</color>
+    <color name="yellow">#FFED00</color>
+    <color name="fair">#ABC270</color>
+    <color name="component">#C0EEF2</color>
 </resources>

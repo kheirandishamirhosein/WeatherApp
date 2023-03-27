@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:trackColor="@color/purple_500" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/co_title_air_pollution_layout"
         android:layout_width="match_parent"
@@ -46,24 +47,777 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/co_recyclerview_air_pollution_layout"
+
+    <ScrollView
+        android:id="@+id/scrollView_air_pollution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:paddingBottom="90dp"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/co_title_air_pollution_layout">
+        app:layout_constraintTop_toBottomOf="@id/co_title_air_pollution_layout">>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/air_pollution_recyclerview"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/co_layout_scrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/list_air_pollution_weather" />
+            android:paddingBottom="90dp">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- co -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_co_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_co_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <ProgressBar
+                        android:id="@+id/pb_co_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_co_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_co_circle_diagram" />
+
+
+                    <TextView
+                        android:id="@+id/tv_co_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_co_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_co_name" />
+
+                    <TextView
+                        android:id="@+id/tv_co_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_co_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_co_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!-- nh3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_nh3_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_co_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_nh3_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_nh3_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_nh3_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_nh3_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_nh3_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_nh3_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_nh3_name" />
+
+                    <TextView
+                        android:id="@+id/tv_nh3_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_nh3_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_nh3_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- no -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_no_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_nh3_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_no_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_no_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_no_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_no_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_no_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_no_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_no_name" />
+
+                    <TextView
+                        android:id="@+id/tv_no_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_no_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- no2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_no2_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_no_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_no2_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_no2_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_no2_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_no2_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_no2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_no2_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_no2_name" />
+
+                    <TextView
+                        android:id="@+id/tv_no2_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_no2_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_no2_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- o3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_o3_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_no2_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_o3_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_o3_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_o3_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_o3_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_o3_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_o3_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_o3_name" />
+
+                    <TextView
+                        android:id="@+id/tv_o3_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_o3_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_o3_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- pm10 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_pm10_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_o3_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_pm10_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_pm10_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pm10_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_pm10_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_pm10_name"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pm10_component"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pm10_name" />
+
+                    <TextView
+                        android:id="@+id/tv_pm10_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm10_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pm10_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- pm2_5 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_pm2_5_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_pm10_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_pm2_5_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_pm2_5_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pm2_5_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_pm2_5_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_pm2_5_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_pm2_5_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pm2_5_name" />
+
+                    <TextView
+                        android:id="@+id/tv_pm2_5_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_pm2_5_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_pm2_5_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- so2 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/md_cv_so2_air_pollution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/dark_mode2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/md_cv_pm2_5_air_pollution">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/co_layout_so2_air_pollution"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp">
+
+
+                    <ProgressBar
+                        android:id="@+id/pb_so2_circle_diagram"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:max="350"
+                        android:progressDrawable="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_so2_num_in_circle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="5dp"
+                        android:paddingTop="5dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="5dp"
+                        android:text="15400"
+                        android:textColor="@color/white"
+                        android:textSize="30sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintEnd_toEndOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintStart_toStartOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintTop_toTopOf="@+id/pb_so2_circle_diagram" />
+
+                    <TextView
+                        android:id="@+id/tv_so2_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        android:text="Carbon monoxide"
+                        android:textColor="@color/purple_200"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_so2_component"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="component"
+                        android:textColor="@color/component"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_so2_name" />
+
+                    <TextView
+                        android:id="@+id/tv_so2_feeling_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="feeling good"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/pb_so2_circle_diagram"
+                        app:layout_constraintTop_toBottomOf="@id/tv_so2_component" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
