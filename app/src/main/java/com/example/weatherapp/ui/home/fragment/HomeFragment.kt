@@ -1,36 +1,43 @@
 package com.example.weatherapp.ui.home.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
 import com.example.weatherapp.util.*
-import com.google.gson.Gson
-import com.squareup.moshi.Json
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        private lateinit var binding: FragmentHomeBinding
-    }
-    private val weatherApiViewModel: WeatherApiViewModel by viewModels()
+    private lateinit var binding: FragmentHomeBinding
+    private val weatherApiViewModel: WeatherApiViewModel by activityViewModels()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         binding = FragmentHomeBinding.bind(view)
         return view
@@ -39,8 +46,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.coLayout.visibility = View.GONE
-        binding.mdPcProgressLoading.visibility = View.VISIBLE
+        if (weatherApiViewModel.currentWeatherStatus.value == null) {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+            getCurrentLocation()
+            binding.mdPcProgressLoading.visibility = View.VISIBLE
+            binding.coLayout.visibility = View.GONE
+        }
+
+        weatherApiViewModel.currentWeatherStatus.observe(viewLifecycleOwner) { setDataView(it) }
+        weatherApiViewModel.cityWeatherStatus.observe(viewLifecycleOwner) { setDataView(it) }
 
         binding.textFieldEdit.setOnEditorActionListener { _, actionId, _ ->
             binding.mdPcProgressLoading.visibility = View.VISIBLE
@@ -108,13 +122,113 @@ class HomeFragment : Fragment() {
         coLayout.visibility = View.VISIBLE
     }
 
-
     // get City Weather
     private fun getCityWeather(city: String) {
         binding.mdPcProgressLoading.visibility = View.VISIBLE
         weatherApiViewModel.fetchCityWeather(city)
-        weatherApiViewModel.cityWeatherStatus.observe(viewLifecycleOwner) { setDataView(it) }
         //Toast.makeText(this,"City Not Found",Toast.LENGTH_SHORT).show()
+    }
+
+    //fetch Current Location Weather latitude , longitude
+    private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
+        weatherApiViewModel.fetchCurrentLocationWeather(latitude, longitude)
+    }
+
+    /***permissions***/
+    /*** imps all permissions in fun getCurrentLocation ***/
+    private fun getCurrentLocation() {
+        if (checkPermission()) {
+            if (isLocationEnabled()) {
+                // latitude and longitude
+                if (ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requestPermissions()
+                    return
+                }
+                fusedLocationClient.lastLocation
+                    .addOnCompleteListener(requireActivity()) { task ->
+                        // Got last known location. In some rare situations this can be null.
+                        val location: Location? = task.result
+                        if (location == null) {
+                            Toast.makeText(requireContext(), "Null Receive", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                            //TODO: imp codes and fetch location weathers
+                            fetchCurrentLocationWeather(
+                                location.latitude.toString(),
+                                location.longitude.toString()
+                            )
+                        }
+                    }
+            } else {
+                //setting
+                Toast.makeText(requireContext(), "Granted", Toast.LENGTH_SHORT).show()
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+        } else {
+            //request permission
+            requestPermissions()
+        }
+    }
+
+
+    //check permission
+    private fun checkPermission(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    //request Permission
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(), arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            777
+        )
+    }
+
+    //override request Permission result
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 777) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
+                getCurrentLocation()
+            } else {
+                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    //is Location Enabled(GPS_PROVIDER,NETWORK_PROVIDER)
+    private fun isLocationEnabled(): Boolean {
+        val locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as
+                LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
 

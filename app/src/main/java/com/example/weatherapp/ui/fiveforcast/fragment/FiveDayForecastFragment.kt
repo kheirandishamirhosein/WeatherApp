@@ -25,11 +25,9 @@ import com.google.android.gms.location.LocationServices
 
 class FiveDayForecastFragment : Fragment() {
 
-    companion object {
-        private lateinit var binding: FragmentFiveDayForcastBinding
-        lateinit var fiveDayForecastListAdapter: ForecastListAdapter
-    }
 
+    private lateinit var binding: FragmentFiveDayForcastBinding
+    lateinit var fiveDayForecastListAdapter: ForecastListAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val fiveDayForecastWeatherApiViewModel: FiveDayForecastViewModel by viewModels()
 

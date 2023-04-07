@@ -1,6 +1,5 @@
 package com.example.weatherapp.ui.home.viewmodel
 
-
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +21,10 @@ class WeatherApiViewModel : ViewModel() {
 
     //fetch Current Location Weather (coroutine , api , Livedata)
     fun fetchCurrentLocationWeather(latitude: String, longitude: String) {
+        //observe viewModel one time , and keep before data
+        if (_currentWeatherStatus.value != null) {
+            return
+        }
         viewModelScope.launch {
             try {
                 _currentWeatherStatus.value =
@@ -43,6 +46,4 @@ class WeatherApiViewModel : ViewModel() {
             }
         }
     }
-
-
 }
