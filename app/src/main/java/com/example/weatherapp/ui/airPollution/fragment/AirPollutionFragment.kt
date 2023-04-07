@@ -66,44 +66,94 @@ class AirPollutionFragment : Fragment() {
     //set data view
     @SuppressLint("SetTextI18n")
     fun setDataView(airPollutionWeatherModel: List<AirPollutionList>) = with(binding) {
-        //co
         for (i in 0..7) {
+            //co
             tvCoName.text = "Carbon monoxide"
             tvCoComponent.text = "" + airPollutionWeatherModel[i].components.co + " μg/m3"
+            tvCoNumInCircle.text = "" + ((airPollutionWeatherModel[i].components.co / 15400) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //nh3
             tvNh3Name.text = "Ammonia"
             tvNh3Component.text = "" + airPollutionWeatherModel[i].components.nh3 + " μg/m3"
+            tvNh3NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.nh3 / 200) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //no
             tvNoName.text = "Nitrogen monoxide"
             tvNoComponent.text = "" + airPollutionWeatherModel[i].components.no + " μg/m3"
+            tvNoNumInCircle.text = "" + ((airPollutionWeatherModel[i].components.no / 100) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //no2
             tvNo2Name.text = "Nitrogen dioxide"
             tvNo2Component.text = "" + airPollutionWeatherModel[i].components.no2 + " μg/m3"
+            tvNo2NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.no2 / 200) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //o3
             tvO3Name.text = "Ozone"
             tvO3Component.text = "" + airPollutionWeatherModel[i].components.o3 + " μg/m3"
+            tvO3NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.o3 / 180) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //pm10
             tvPm10Name.text = "Coarse particulate matter"
             tvPm10Name.isSelected = true
             tvPm10Component.text = "" + airPollutionWeatherModel[i].components.pm10 + " μg/m3"
+            tvPm10NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.pm10 / 200) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //pm2_5
             tvPm25Name.text = "Fine particles matter"
             tvPm25Name.isSelected = true
             tvPm25Component.text = "" + airPollutionWeatherModel[i].components.pm2_5 + " μg/m3"
+            tvPm25NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.pm2_5 / 200) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
             //so2
             tvSo2Name.text = "Sulphur dioxide"
             tvSo2Component.text = "" + airPollutionWeatherModel[i].components.so2 + " μg/m3"
+            tvSo2NumInCircle.text = "" + ((airPollutionWeatherModel[i].components.so2 / 350) * 100).toInt() + "%"
             updateFeelingStatusApi(airPollutionWeatherModel[i].main.aqi)
-        }
-    }
 
+            /*** pb circle diagram ***/
+            //co
+            pbCoCircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.co.toInt()
+                max = 15400
+            }
+            //nh3
+            pbNh3CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.nh3.toInt()
+                max = 200
+            }
+            //no
+            pbNoCircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.no.toInt()
+                max = 100
+            }
+            //no2
+            pbNo2CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.no2.toInt()
+                max = 200
+            }
+            //o3
+            pbO3CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.o3.toInt()
+                max = 180
+            }
+            //pm10
+            pbPm10CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.pm10.toInt()
+                max = 200
+            }
+            //pm2_5
+            pbPm25CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.pm2_5.toInt()
+                max = 200
+            }
+            //so2
+            pbSo2CircleDiagram.apply {
+                progress = airPollutionWeatherModel[i].components.so2.toInt()
+                max = 350
+            }
+        }
+
+    }
 
     @SuppressLint("SetTextI18n")
     fun updateFeelingStatusApi(api: Int) = with(binding) {

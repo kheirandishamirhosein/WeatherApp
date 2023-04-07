@@ -2,6 +2,7 @@ package com.example.weatherapp.ui.home.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,8 @@ import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
 import com.example.weatherapp.util.*
-
+import com.google.gson.Gson
+import com.squareup.moshi.Json
 
 class HomeFragment : Fragment() {
 
@@ -23,14 +25,20 @@ class HomeFragment : Fragment() {
         @SuppressLint("StaticFieldLeak")
         private lateinit var binding: FragmentHomeBinding
     }
-
     private val weatherApiViewModel: WeatherApiViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         binding = FragmentHomeBinding.bind(view)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.coLayout.visibility = View.GONE
         binding.mdPcProgressLoading.visibility = View.VISIBLE
 
@@ -48,10 +56,7 @@ class HomeFragment : Fragment() {
                 true
             } else false
         }
-
-        return view
     }
-
 
     @SuppressLint("SetTextI18n")
     fun setDataView(weatherModel: WeatherModel?) = with(binding) {

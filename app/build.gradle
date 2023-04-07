@@ -71,8 +71,11 @@ dependencies {
     // navigation For Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
-
-
+    //data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.preference:preference-ktx:1.2.0"
+    //data json
+    implementation 'com.google.code.gson:gson:2.8.9'
 
 
 
