@@ -17,6 +17,13 @@ Home screen
 
 ![5 Day Forecast_Weather App](https://user-images.githubusercontent.com/115555417/226141708-8400b6c3-4474-4019-abe3-6c467a1e9f8d.jpg)
 
+
+
+Air Pollution screen
+
+https://lh3.googleusercontent.com/bZPu7ZUQzhDMDV6qMsMUxxZuFbT0JeiGFd1VPlznYrij3FVjv_lhiS1wXPX3OLzMGWZ3EyNQSHsKGdlqTGN-YEX1MguiLbua5gOuqVL3
+
+
 ---------------
 I used the following topics to make it :
 1. Material Design
@@ -29,4 +36,4 @@ I used the following topics to make it :
 Items
 1. home item (search all citys and current location)
 2. 5 day 3 hour forecast data in current location
-3. air pollution (coming soon...)
+3. air pollution current location
