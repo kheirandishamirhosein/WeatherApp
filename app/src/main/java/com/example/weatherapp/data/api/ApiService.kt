@@ -26,8 +26,6 @@ private val retrofit = Retrofit.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-            .connectTimeout(30, TimeUnit.SECONDS) // connect timeout
-            .readTimeout(30, TimeUnit.SECONDS) // socket timeout
             .build()
     )
     .addConverterFactory(MoshiConverterFactory.create(moshi))

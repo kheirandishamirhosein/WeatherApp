@@ -47,7 +47,6 @@ class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastVie
 
         @SuppressLint("SetTextI18n")
         fun bind(fiveForecastWeatherModel: FiveForecastList) {
-            Log.d("sdsdsd", "run bind method adapter")
             tvTempForecast5Day.text =
                 "" + KelvinToCelsius.kelvinToCelsius(fiveForecastWeatherModel.main.temp) + ""
             tvWeatherTypeForecast5Day.text = fiveForecastWeatherModel.weather[0].main
