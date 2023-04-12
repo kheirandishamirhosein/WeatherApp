@@ -3,6 +3,7 @@ package com.example.weatherapp.data.api
 import com.example.weatherapp.data.model.airPollution.AirPollution
 import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.data.model.forecastLocation.FiveForecastWeatherModel
+import com.example.weatherapp.data.model.persianCalender.PersianCalendar
 import com.example.weatherapp.util.UrlKeyApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -12,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.concurrent.TimeUnit
 
 //moshi
 private val moshi = Moshi.Builder()
@@ -30,6 +30,19 @@ private val retrofit = Retrofit.Builder()
     )
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(UrlKeyApi.BASE_URL)
+    .build()
+
+//calendar retrofit
+private val calendarRetrofit = Retrofit.Builder()
+    .client(
+        OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
+    )
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .baseUrl(UrlKeyApi.CALENDAR_BASE_URL)
     .build()
 
 // interface for get Api
@@ -61,11 +74,18 @@ interface WeatherApi {
         @Query("lon") longitude: String,
         @Query("APPID") api_key: String
     ): AirPollution
+
+    @GET("time/")
+    suspend fun getCalendarData(): PersianCalendar
 }
 
 //object api for get retrofit
 object GetApi {
     val retrofitService: WeatherApi by lazy {
         retrofit.create(WeatherApi::class.java)
+    }
+
+    val calendarRetrofitService: WeatherApi by lazy {
+        calendarRetrofit.create(WeatherApi::class.java)
     }
 }

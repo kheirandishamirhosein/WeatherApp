@@ -17,5 +17,10 @@
         android:title="Air Pollution"
         android:icon="@drawable/ic_air_pollution"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/bar_calendar"
+        android:title="calendar"
+        android:icon="@drawable/ic_bar_calendar"
+        app:showAsAction="ifRoom"/>
 
 </menu>

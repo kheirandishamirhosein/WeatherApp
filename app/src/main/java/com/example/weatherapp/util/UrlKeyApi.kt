@@ -4,7 +4,7 @@ class UrlKeyApi {
 
     companion object {
         const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+        const val CALENDAR_BASE_URL = "https://api.keybit.ir/"
         const val KEY = "8a527465512577b1cba0635c7437160a"
-        const val PREFERENCE_KEY = "preference_key"
     }
 }
