@@ -26,7 +26,7 @@ Air Pollution screen
 
 
 
-Calendar
+Calendar screen
 
 ![Calendar](https://user-images.githubusercontent.com/115555417/231590140-cf8a7838-e68f-489d-937e-a5fa6de78ab8.jpg)
 
