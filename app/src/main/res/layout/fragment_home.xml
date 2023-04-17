@@ -29,7 +29,7 @@
         android:layout_height="match_parent"
         android:visibility="visible">
 
-
+<!--
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/md_cv_toolbar"
             android:layout_width="match_parent"
@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
+-->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/md_cv_searchView"
                 android:layout_width="match_parent"
@@ -46,7 +46,10 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
-                app:cardBackgroundColor="@color/dark_mode">
+                app:cardBackgroundColor="@color/dark_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/md_tf_get_city_name"
@@ -78,15 +81,16 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+        <!--
         </com.google.android.material.card.MaterialCardView>
-
+        -->
 
         <RelativeLayout
             android:id="@+id/rl_layout_date_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/md_cv_toolbar">
+            app:layout_constraintTop_toBottomOf="@id/md_cv_searchView">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/md_tv_date"

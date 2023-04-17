@@ -18,18 +18,21 @@
         android:icon="@mipmap/ic_clear"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:theme="@style/Theme.WeatherApp"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         tools:targetApi="31">
-        <!--
-        android:enableOnBackInvokedCallback="true"
-        tools:targetApi="tiramisu"
-        -->
-
+      <!--
         <activity
-            android:name=".ui.home.activity.MainActivity"
+            android:name=".MainActivityWeather"
+            android:exported="false"
+            android:label="@string/title_activity_main_weather"
+            android:theme="@style/NoActionBar" />
+            -->
+        <!-- android:theme="@style/Theme.WeatherApp" -->
+        <activity
+            android:name=".ui.home.activity.MainActivityWeather"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"
             android:exported="true"
+            android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             app:cardBackgroundColor="@color/dark_mode2"
@@ -79,11 +79,11 @@
                     android:id="@+id/iv_calendar_years"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
                     android:src="@drawable/iv_check_box_year"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_calendar_month"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_image" />
 
                 <TextView
@@ -96,7 +96,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_years"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_years"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_years"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_years"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_years" />
 
                 <ImageView
                     android:id="@+id/iv_calendar_month"
@@ -104,8 +104,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:src="@drawable/iv_check_box_month"
-                    app:layout_constraintStart_toEndOf="@id/iv_calendar_years"
                     app:layout_constraintEnd_toStartOf="@id/iv_calendar_day"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_years"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_image" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_month"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_month"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_month"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_month"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_month" />
 
 
                 <ImageView
@@ -128,8 +128,8 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="10dp"
                     android:src="@drawable/iv_check_box_day"
-                    app:layout_constraintStart_toEndOf="@id/iv_calendar_month"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_month"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_image" />
 
                 <TextView
@@ -142,7 +142,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_day"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_day"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_day"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_day"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_day" />
 
 
                 <ImageView
@@ -161,19 +161,19 @@
                     android:layout_height="wrap_content"
                     android:text="پنجشنبه"
                     android:textColor="@color/white"
-                    android:textSize="20sp"
+                    android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_weekday"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_weekday"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_weekday"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_weekday"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_weekday" />
 
                 <ImageView
                     android:id="@+id/iv_calendar_time_12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    app:layout_constraintEnd_toStartOf="@id/iv_calendar_weekday"
                     android:src="@drawable/iv_check_box_time_12"
+                    app:layout_constraintEnd_toStartOf="@id/iv_calendar_weekday"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_years" />
 
@@ -183,22 +183,22 @@
                     android:layout_height="wrap_content"
                     android:text="۰۳:۲۵:۲۸ بعد از ظهر"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_time_12"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_time_12"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_time_12"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_time_12"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_time_12" />
 
 
                 <ImageView
                     android:id="@+id/iv_calendar_loc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
                     android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
                     android:src="@drawable/iv_check_box_year"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/iv_calendar_animal"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_time_12" />
 
                 <TextView
@@ -211,7 +211,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_loc"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_loc"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_loc"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_loc"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_loc" />
 
                 <ImageView
                     android:id="@+id/iv_calendar_animal"
@@ -219,8 +219,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:src="@drawable/iv_check_box_month"
-                    app:layout_constraintStart_toEndOf="@id/iv_calendar_loc"
                     app:layout_constraintEnd_toStartOf="@id/iv_calendar_season"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_loc"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_time_12" />
 
                 <TextView
@@ -233,7 +233,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_animal"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_animal"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_animal"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_animal"/>
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_animal" />
 
 
                 <ImageView
@@ -245,8 +245,8 @@
                     android:layout_marginBottom="40dp"
                     android:src="@drawable/iv_check_box_day"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/iv_calendar_animal"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_animal"
                     app:layout_constraintTop_toBottomOf="@id/iv_calendar_weekday" />
 
                 <TextView
@@ -259,15 +259,9 @@
                     app:layout_constraintBottom_toBottomOf="@id/iv_calendar_season"
                     app:layout_constraintEnd_toEndOf="@id/iv_calendar_season"
                     app:layout_constraintStart_toStartOf="@id/iv_calendar_season"
-                    app:layout_constraintTop_toTopOf="@id/iv_calendar_season"/>
-
-
-
-
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_season" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,10 @@ class CalendarViewModel : ViewModel() {
     val calendarStatus: LiveData<PersianCalendar> = _calendarStatus
 
     fun fetchCalendarData() {
+        //observe viewModel one time , and keep before data
+        if (_calendarStatus.value != null) {
+            return
+        }
         viewModelScope.launch {
             try {
                 _calendarStatus.value = GetApi.calendarRetrofitService.getCalendarData()

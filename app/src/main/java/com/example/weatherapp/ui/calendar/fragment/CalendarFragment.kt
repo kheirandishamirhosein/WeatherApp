@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.persianCalender.PersianCalendar
 import com.example.weatherapp.databinding.FragmentCalendarBinding
 import com.example.weatherapp.ui.calendar.viewmodel.CalendarViewModel
+import com.example.weatherapp.util.TimeFormatter
 
 class CalendarFragment : Fragment() {
 
     private lateinit var binding: FragmentCalendarBinding
-    private val calendarApiViewModel: CalendarViewModel by viewModels()
+    private val calendarApiViewModel: CalendarViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,25 +33,22 @@ class CalendarFragment : Fragment() {
     }
 
     private fun setData(persianCalendar: PersianCalendar) = with(binding) {
-    tvDate.text = persianCalendar.date.full.official.usual.fa
-        //
+        tvDate.text = persianCalendar.date.full.official.usual.fa
         tvDateYear.text = persianCalendar.date.year.name
         tvDateMonth.text = persianCalendar.date.month.name
-        tvDateDay.text=persianCalendar.date.day.name
-        //
-        tvDateWeekday.text=persianCalendar.date.weekday.name
-        tvDateTime12.text=persianCalendar.time12.full.full.fa
-        //
-        tvCalendarSeason.text=persianCalendar.season.name
-        tvCalendarAnimal.text=persianCalendar.date.year.animal
-        tvCalendarLoc.text=persianCalendar.timezone.name
+        tvDateDay.text = persianCalendar.date.day.name
+        tvDateWeekday.text = persianCalendar.date.weekday.name
+        tvDateTime12.text = TimeFormatter.currentTime
+        tvCalendarSeason.text = persianCalendar.season.name
+        tvCalendarAnimal.text = persianCalendar.date.year.animal
+        tvCalendarLoc.text = persianCalendar.timezone.name
     }
 
-    private fun fetchCalendarViewModel() = with(binding){
-        mdPcProgressLoading.visibility =View.VISIBLE
+    private fun fetchCalendarViewModel() = with(binding) {
+        mdPcProgressLoading.visibility = View.VISIBLE
         calendarApiViewModel.fetchCalendarData()
-        calendarApiViewModel.calendarStatus.observe(viewLifecycleOwner){
-            mdPcProgressLoading.visibility =View.GONE
+        calendarApiViewModel.calendarStatus.observe(viewLifecycleOwner) {
+            mdPcProgressLoading.visibility = View.GONE
             binding.coLayout.visibility = View.VISIBLE
             setData(it)
         }

@@ -7,9 +7,9 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.weatherapp.ui.home.activity.MainActivity"
+        android:name="com.example.weatherapp.ui.home.activity.MainActivityWeather"
         android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_main_weather" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.weatherapp.ui.home.fragment.HomeFragment"
@@ -35,6 +35,15 @@
         tools:layout="@layout/fragment_air_pollution" >
         <action
             android:id="@+id/action_airPollutionFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.weatherapp.ui.calendar.fragment.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
     </fragment>
 </navigation>

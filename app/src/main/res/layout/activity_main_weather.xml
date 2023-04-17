@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_mode"
-    tools:context=".ui.home.activity.MainActivity">
+    tools:context=".ui.home.activity.MainActivityWeather">
 
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -37,11 +37,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/purple_500"
-        app:itemRippleColor="@color/dark_mode"
+        android:background="#99D0BCFF"
+        app:itemIconTint="@color/blue_app_bar"
+        android:backgroundTint="@color/white"
+        app:itemTextColor="@color/blue_app_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_navigation" />
-
+        app:menu="@menu/bottom_navigation"
+        />
+        <!--#996750A4
+        #99D0BCFF-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

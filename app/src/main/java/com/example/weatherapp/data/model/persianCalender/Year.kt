@@ -1,9 +1,8 @@
 package com.example.weatherapp.data.model.persianCalender
 
+import com.squareup.moshi.Json
+
 data class Year(
-    val agone: Agone,
-    val animal: String,
-    val leapyear: String,
-    val name: String,
-    val number: Number
+    @Json(name = "animal") val animal: String,
+    @Json(name = "name") val name: String
 )
