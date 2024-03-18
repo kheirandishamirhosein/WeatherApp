@@ -6,7 +6,7 @@ This app must be given access to the internet and the location of the phone.
 api of this app from the site
 It is https://openweathermap.org/.
 and use https://api.keybit.ir/time/, for solor calendar (persian calendar).
-(And I am still working on the development of this app)
+(And I am still working on the development of this app).
 ---------------
 Home screen 
 
