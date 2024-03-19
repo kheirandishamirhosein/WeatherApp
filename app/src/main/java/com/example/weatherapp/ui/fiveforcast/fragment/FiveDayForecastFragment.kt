@@ -1,11 +1,9 @@
 package com.example.weatherapp.ui.fiveforcast.fragment
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -20,16 +18,17 @@ import com.example.weatherapp.R
 import com.example.weatherapp.databinding.FragmentFiveDayForcastBinding
 import com.example.weatherapp.ui.fiveforcast.adapter.ForecastListAdapter
 import com.example.weatherapp.ui.fiveforcast.viewmodel.FiveDayForecastViewModel
+import com.example.weatherapp.util.LocationPermission
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class FiveDayForecastFragment : Fragment() {
 
-
     private lateinit var binding: FragmentFiveDayForcastBinding
     lateinit var fiveDayForecastListAdapter: ForecastListAdapter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val fiveDayForecastWeatherApiViewModel: FiveDayForecastViewModel by viewModels()
+    private lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +41,7 @@ class FiveDayForecastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        locationPermission = LocationPermission(requireActivity())
         fusedLocationClient = context?.let { LocationServices.getFusedLocationProviderClient(it) }!!
         getCurrentLocation()
         bindRecyclerview()
@@ -65,8 +65,8 @@ class FiveDayForecastFragment : Fragment() {
     }
 
     private fun getCurrentLocation() {
-        if (checkPermission()) {
-            if (isLocationEnabled()) {
+        if (locationPermission.checkLocationPermission()) {
+            if (locationPermission.isLocationEnabled()) {
                 // latitude and longitude
                 if (context?.let {
                         ActivityCompat.checkSelfPermission(
@@ -80,7 +80,7 @@ class FiveDayForecastFragment : Fragment() {
                         )
                     } != PackageManager.PERMISSION_GRANTED
                 ) {
-                    requestPermissions()
+                    locationPermission.requestLocationPermission()
                     return
                 }
                 fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
@@ -105,60 +105,8 @@ class FiveDayForecastFragment : Fragment() {
             }
         } else {
             //request permission
-            requestPermissions()
+            locationPermission.requestLocationPermission()
         }
-    }
-
-    //check permission
-    private fun checkPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    //request Permission
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            777
-        )
-    }
-
-    //override request Permission result
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 777) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
-                getCurrentLocation()
-            } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    //is Location Enabled(GPS_PROVIDER,NETWORK_PROVIDER)
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as
-                LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
 }
