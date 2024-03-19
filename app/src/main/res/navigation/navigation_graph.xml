@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.weatherapp.ui.home.activity.MainActivityWeather"
+        android:name="com.example.weatherapp.main.MainActivityWeather"
         android:label="activity_main"
         tools:layout="@layout/activity_main_weather" />
     <fragment

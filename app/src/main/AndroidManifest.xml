@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".main.WeatherApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -29,7 +30,7 @@
             -->
         <!-- android:theme="@style/Theme.WeatherApp" -->
         <activity
-            android:name=".ui.home.activity.MainActivityWeather"
+            android:name=".main.MainActivityWeather"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait"
