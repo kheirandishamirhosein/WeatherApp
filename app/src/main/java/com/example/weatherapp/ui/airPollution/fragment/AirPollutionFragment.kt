@@ -24,7 +24,6 @@ import com.example.weatherapp.ui.airPollution.viewmodel.AirPollutionViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-//commit test
 class AirPollutionFragment : Fragment() {
 
     private lateinit var binding: FragmentAirPollutionBinding
