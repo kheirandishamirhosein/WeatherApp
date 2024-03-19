@@ -32,6 +32,7 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val weatherApiViewModel: WeatherApiViewModel by activityViewModels()
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +46,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        locationPermission = LocationPermission(requireActivity())
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         if (weatherApiViewModel.currentWeatherStatus.value == null) {
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
             getCurrentLocation()
             binding.mdPcProgressLoading.visibility = View.VISIBLE
             binding.coLayout.visibility = View.GONE
@@ -137,8 +139,8 @@ class HomeFragment : Fragment() {
     /***permissions***/
     /*** imps all permissions in fun getCurrentLocation ***/
     private fun getCurrentLocation() {
-        if (checkPermission()) {
-            if (isLocationEnabled()) {
+        if (locationPermission.checkLocationPermission()) {
+            if (locationPermission.isLocationEnabled()) {
                 // latitude and longitude
                 if (ActivityCompat.checkSelfPermission(
                         requireContext(),
@@ -148,7 +150,7 @@ class HomeFragment : Fragment() {
                         Manifest.permission.ACCESS_COARSE_LOCATION
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
-                    requestPermissions()
+                    locationPermission.checkLocationPermission()
                     return
                 }
                 fusedLocationClient.lastLocation
@@ -174,62 +176,8 @@ class HomeFragment : Fragment() {
             }
         } else {
             //request permission
-            requestPermissions()
+            locationPermission.requestLocationPermission()
         }
     }
-
-
-    //check permission
-    private fun checkPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    //request Permission
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            777
-        )
-    }
-
-    //override request Permission result
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 777) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
-                getCurrentLocation()
-            } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    //is Location Enabled(GPS_PROVIDER,NETWORK_PROVIDER)
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as
-                LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
-
 
 }
