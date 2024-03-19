@@ -2,11 +2,9 @@ package com.example.weatherapp.ui.airPollution.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -21,6 +19,7 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.model.airPollution.AirPollutionList
 import com.example.weatherapp.databinding.FragmentAirPollutionBinding
 import com.example.weatherapp.ui.airPollution.viewmodel.AirPollutionViewModel
+import com.example.weatherapp.util.LocationPermission
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -29,6 +28,7 @@ class AirPollutionFragment : Fragment() {
     private lateinit var binding: FragmentAirPollutionBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val airPollutionWeatherApiViewModel: AirPollutionViewModel by viewModels()
+    private lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +41,7 @@ class AirPollutionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        locationPermission = LocationPermission(requireActivity())
         fusedLocationClient = context?.let { LocationServices.getFusedLocationProviderClient(it) }!!
         getCurrentLocation()
         binding.scrollViewAirPollution.visibility = View.GONE
@@ -63,90 +64,90 @@ class AirPollutionFragment : Fragment() {
     fun setDataView(airPollution: List<AirPollutionList>) = with(binding) {
         val airPollution = airPollution[0]
 
-            //co
-            tvCoName.text = "Carbon monoxide"
-            tvCoComponent.text = "" + airPollution.components.co + " μg/m3"
-            tvCoNumInCircle.text = "" + ((airPollution.components.co / 15400) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //nh3
-            tvNh3Name.text = "Ammonia"
-            tvNh3Component.text = "" + airPollution.components.nh3 + " μg/m3"
-            tvNh3NumInCircle.text = "" + ((airPollution.components.nh3 / 200) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //no
-            tvNoName.text = "Nitrogen monoxide"
-            tvNoComponent.text = "" + airPollution.components.no + " μg/m3"
-            tvNoNumInCircle.text = "" + ((airPollution.components.no / 300) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //no2
-            tvNo2Name.text = "Nitrogen dioxide"
-            tvNo2Component.text = "" + airPollution.components.no2 + " μg/m3"
-            tvNo2NumInCircle.text = "" + ((airPollution.components.no2 / 200) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //o3
-            tvO3Name.text = "Ozone"
-            tvO3Component.text = "" + airPollution.components.o3 + " μg/m3"
-            tvO3NumInCircle.text = "" + ((airPollution.components.o3 / 180) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //pm10
-            tvPm10Name.text = "Coarse particulate matter"
-            tvPm10Name.isSelected = true
-            tvPm10Component.text = "" + airPollution.components.pm10 + " μg/m3"
-            tvPm10NumInCircle.text = "" + ((airPollution.components.pm10 / 200) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //pm2_5
-            tvPm25Name.text = "Fine particles matter"
-            tvPm25Name.isSelected = true
-            tvPm25Component.text = "" + airPollution.components.pm2_5 + " μg/m3"
-            tvPm25NumInCircle.text = "" + ((airPollution.components.pm2_5 / 200) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
-            //so2
-            tvSo2Name.text = "Sulphur dioxide"
-            tvSo2Component.text = "" + airPollution.components.so2 + " μg/m3"
-            tvSo2NumInCircle.text = "" + ((airPollution.components.so2 / 350) * 100).toInt() + "%"
-            updateFeelingStatusApi(airPollution.main.aqi)
+        //co
+        tvCoName.text = "Carbon monoxide"
+        tvCoComponent.text = "" + airPollution.components.co + " μg/m3"
+        tvCoNumInCircle.text = "" + ((airPollution.components.co / 15400) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //nh3
+        tvNh3Name.text = "Ammonia"
+        tvNh3Component.text = "" + airPollution.components.nh3 + " μg/m3"
+        tvNh3NumInCircle.text = "" + ((airPollution.components.nh3 / 200) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //no
+        tvNoName.text = "Nitrogen monoxide"
+        tvNoComponent.text = "" + airPollution.components.no + " μg/m3"
+        tvNoNumInCircle.text = "" + ((airPollution.components.no / 300) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //no2
+        tvNo2Name.text = "Nitrogen dioxide"
+        tvNo2Component.text = "" + airPollution.components.no2 + " μg/m3"
+        tvNo2NumInCircle.text = "" + ((airPollution.components.no2 / 200) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //o3
+        tvO3Name.text = "Ozone"
+        tvO3Component.text = "" + airPollution.components.o3 + " μg/m3"
+        tvO3NumInCircle.text = "" + ((airPollution.components.o3 / 180) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //pm10
+        tvPm10Name.text = "Coarse particulate matter"
+        tvPm10Name.isSelected = true
+        tvPm10Component.text = "" + airPollution.components.pm10 + " μg/m3"
+        tvPm10NumInCircle.text = "" + ((airPollution.components.pm10 / 200) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //pm2_5
+        tvPm25Name.text = "Fine particles matter"
+        tvPm25Name.isSelected = true
+        tvPm25Component.text = "" + airPollution.components.pm2_5 + " μg/m3"
+        tvPm25NumInCircle.text = "" + ((airPollution.components.pm2_5 / 200) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
+        //so2
+        tvSo2Name.text = "Sulphur dioxide"
+        tvSo2Component.text = "" + airPollution.components.so2 + " μg/m3"
+        tvSo2NumInCircle.text = "" + ((airPollution.components.so2 / 350) * 100).toInt() + "%"
+        updateFeelingStatusApi(airPollution.main.aqi)
 
-            /*** pb circle diagram ***/
-            //co
-            pbCoCircleDiagram.apply {
-                progress = airPollution.components.co.toInt()
-                max = 15400
-            }
-            //nh3
-            pbNh3CircleDiagram.apply {
-                progress = airPollution.components.nh3.toInt()
-                max = 200
-            }
-            //no
-            pbNoCircleDiagram.apply {
-                progress = airPollution.components.no.toInt()
-                max = 300
-            }
-            //no2
-            pbNo2CircleDiagram.apply {
-                progress = airPollution.components.no2.toInt()
-                max = 200
-            }
-            //o3
-            pbO3CircleDiagram.apply {
-                progress = airPollution.components.o3.toInt()
-                max = 180
-            }
-            //pm10
-            pbPm10CircleDiagram.apply {
-                progress = airPollution.components.pm10.toInt()
-                max = 200
-            }
-            //pm2_5
-            pbPm25CircleDiagram.apply {
-                progress = airPollution.components.pm2_5.toInt()
-                max = 200
-            }
-            //so2
-            pbSo2CircleDiagram.apply {
-                progress = airPollution.components.so2.toInt()
-                max = 350
-            }
+        /*** pb circle diagram ***/
+        //co
+        pbCoCircleDiagram.apply {
+            progress = airPollution.components.co.toInt()
+            max = 15400
+        }
+        //nh3
+        pbNh3CircleDiagram.apply {
+            progress = airPollution.components.nh3.toInt()
+            max = 200
+        }
+        //no
+        pbNoCircleDiagram.apply {
+            progress = airPollution.components.no.toInt()
+            max = 300
+        }
+        //no2
+        pbNo2CircleDiagram.apply {
+            progress = airPollution.components.no2.toInt()
+            max = 200
+        }
+        //o3
+        pbO3CircleDiagram.apply {
+            progress = airPollution.components.o3.toInt()
+            max = 180
+        }
+        //pm10
+        pbPm10CircleDiagram.apply {
+            progress = airPollution.components.pm10.toInt()
+            max = 200
+        }
+        //pm2_5
+        pbPm25CircleDiagram.apply {
+            progress = airPollution.components.pm2_5.toInt()
+            max = 200
+        }
+        //so2
+        pbSo2CircleDiagram.apply {
+            progress = airPollution.components.so2.toInt()
+            max = 350
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -288,8 +289,8 @@ class AirPollutionFragment : Fragment() {
 
     /*****get current location an permissions *****/
     private fun getCurrentLocation() {
-        if (checkPermission()) {
-            if (isLocationEnabled()) {
+        if (locationPermission.checkLocationPermission()) {
+            if (locationPermission.isLocationEnabled()) {
                 // latitude and longitude
                 if (context?.let {
                         ActivityCompat.checkSelfPermission(
@@ -303,7 +304,7 @@ class AirPollutionFragment : Fragment() {
                         )
                     } != PackageManager.PERMISSION_GRANTED
                 ) {
-                    requestPermissions()
+                    locationPermission.requestLocationPermission()
                     return
                 }
                 fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
@@ -328,59 +329,8 @@ class AirPollutionFragment : Fragment() {
             }
         } else {
             //request permission
-            requestPermissions()
+            locationPermission.requestLocationPermission()
         }
     }
 
-    //check permission
-    private fun checkPermission(): Boolean {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
-        return false
-    }
-
-    //request Permission
-    private fun requestPermissions() {
-        ActivityCompat.requestPermissions(
-            requireActivity(), arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ),
-            777
-        )
-    }
-
-    //override request Permission result
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 777) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(requireContext(), "Permission Granted", Toast.LENGTH_SHORT).show()
-                getCurrentLocation()
-            } else {
-                Toast.makeText(requireContext(), "Permission Denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    //is Location Enabled(GPS_PROVIDER,NETWORK_PROVIDER)
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as
-                LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
-                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-    }
 }

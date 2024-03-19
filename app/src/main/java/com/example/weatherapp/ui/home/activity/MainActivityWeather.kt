@@ -19,6 +19,7 @@ class MainActivityWeather : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWeatherBinding
     private lateinit var locationPermission: LocationPermission
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainWeatherBinding.inflate(layoutInflater)
