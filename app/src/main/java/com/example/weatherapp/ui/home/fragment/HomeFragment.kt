@@ -1,20 +1,14 @@
 package com.example.weatherapp.ui.home.fragment
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.weatherapp.R
@@ -22,14 +16,11 @@ import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
 import com.example.weatherapp.util.*
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val weatherApiViewModel: WeatherApiViewModel by activityViewModels()
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
@@ -45,7 +36,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationPermission = LocationPermission(requireActivity())
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         if (weatherApiViewModel.currentWeatherStatus.value == null) {
             getCurrentLocation()
@@ -134,47 +124,16 @@ class HomeFragment : Fragment() {
         weatherApiViewModel.fetchCurrentLocationWeather(latitude, longitude)
     }
 
-    /***permissions***/
-    /*** imps all permissions in fun getCurrentLocation ***/
     private fun getCurrentLocation() {
-        if (locationPermission.checkLocationPermission()) {
-            if (locationPermission.isLocationEnabled()) {
-                // latitude and longitude
-                if (ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    locationPermission.checkLocationPermission()
-                    return
-                }
-                fusedLocationClient.lastLocation
-                    .addOnCompleteListener(requireActivity()) { task ->
-                        // Got last known location. In some rare situations this can be null.
-                        val location: Location? = task.result
-                        if (location == null) {
-                            Toast.makeText(requireContext(), "Null Receive", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
-                            //TODO: imp codes and fetch location weathers
-                            fetchCurrentLocationWeather(
-                                location.latitude.toString(),
-                                location.longitude.toString()
-                            )
-                        }
-                    }
+        locationPermission.getCurrentLocation { location ->
+            if (location == null) {
+                // Handle case when location is null
+                Toast.makeText(context, "Failed to get current location", Toast.LENGTH_SHORT).show()
             } else {
-                //setting
-                Toast.makeText(requireContext(), "Granted", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
+                val latitude = location.latitude
+                val longitude = location.longitude
+                fetchCurrentLocationWeather(latitude.toString(), longitude.toString())
             }
-        } else {
-            //request permission
-            locationPermission.requestLocationPermission()
         }
     }
 
