@@ -1,17 +1,11 @@
 package com.example.weatherapp.ui.airPollution.fragment
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,13 +14,11 @@ import com.example.weatherapp.data.model.airPollution.AirPollutionList
 import com.example.weatherapp.databinding.FragmentAirPollutionBinding
 import com.example.weatherapp.ui.airPollution.viewmodel.AirPollutionViewModel
 import com.example.weatherapp.util.LocationPermission
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class AirPollutionFragment : Fragment() {
 
     private lateinit var binding: FragmentAirPollutionBinding
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val airPollutionWeatherApiViewModel: AirPollutionViewModel by viewModels()
     private lateinit var locationPermission: LocationPermission
 
@@ -42,7 +34,6 @@ class AirPollutionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         locationPermission = LocationPermission(requireActivity())
-        fusedLocationClient = context?.let { LocationServices.getFusedLocationProviderClient(it) }!!
         getCurrentLocation()
         binding.scrollViewAirPollution.visibility = View.GONE
 
@@ -286,50 +277,15 @@ class AirPollutionFragment : Fragment() {
         }
     }
 
-
-    /*****get current location an permissions *****/
     private fun getCurrentLocation() {
-        if (locationPermission.checkLocationPermission()) {
-            if (locationPermission.isLocationEnabled()) {
-                // latitude and longitude
-                if (context?.let {
-                        ActivityCompat.checkSelfPermission(
-                            it,
-                            Manifest.permission.ACCESS_FINE_LOCATION
-                        )
-                    } != PackageManager.PERMISSION_GRANTED && context?.let {
-                        ActivityCompat.checkSelfPermission(
-                            it,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        )
-                    } != PackageManager.PERMISSION_GRANTED
-                ) {
-                    locationPermission.requestLocationPermission()
-                    return
-                }
-                fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
-                    // Got last known location. In some rare situations this can be null.
-                    val location: Location? = task.result
-                    if (location == null) {
-                        Toast.makeText(context, "Null Receive", Toast.LENGTH_SHORT).show()
-                    } else {
-                        //TODO: imp codes and fetch location weathers
-                        //fetchCurrentLocationFiveDayForecastWeather()
-                        fetchCurrentLocationAirPollutionWeather(
-                            location.latitude.toString(),
-                            location.longitude.toString()
-                        )
-                    }
-                }
+        locationPermission.getCurrentLocation { location ->
+            if (location == null) {
+                Toast.makeText(context, "Failed to get current location", Toast.LENGTH_SHORT).show()
             } else {
-                //setting
-                Toast.makeText(context, "Granted", Toast.LENGTH_SHORT).show()
-                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                startActivity(intent)
+                val latitude = location.latitude
+                val longitude = location.longitude
+                fetchCurrentLocationAirPollutionWeather(latitude.toString(), longitude.toString())
             }
-        } else {
-            //request permission
-            locationPermission.requestLocationPermission()
         }
     }
 
