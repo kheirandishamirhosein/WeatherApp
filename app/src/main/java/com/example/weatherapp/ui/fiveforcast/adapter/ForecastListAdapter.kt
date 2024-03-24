@@ -1,17 +1,39 @@
 package com.example.weatherapp.ui.fiveforcast.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.forecastLocation.FiveForecastList
 import com.example.weatherapp.util.KelvinToCelsius
 
+class ForecastListDiffCallback(
+    private val oldList: List<FiveForecastList>,
+    private val newList: List<FiveForecastList>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int {
+        return oldList.size
+    }
+
+    override fun getNewListSize(): Int {
+        return newList.size
+    }
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].dt_txt == newList[newItemPosition].dt_txt
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+
+}
 
 class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastViewHolder>() {
 
@@ -19,8 +41,11 @@ class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastVie
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItem(itemList: List<FiveForecastList>) {
+        val diffResult = DiffUtil.calculateDiff(
+            ForecastListDiffCallback(itemWeatherList, itemList)
+        )
         this.itemWeatherList = itemList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
