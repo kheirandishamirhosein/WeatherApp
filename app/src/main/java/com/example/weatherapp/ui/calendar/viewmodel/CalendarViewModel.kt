@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.api.GetApi
 import com.example.weatherapp.data.model.persianCalender.PersianCalendar
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CalendarViewModel : ViewModel() {
+class CalendarViewModel @Inject constructor() : ViewModel() {
 
     private val _calendarStatus = MutableLiveData<PersianCalendar>()
     val calendarStatus: LiveData<PersianCalendar> = _calendarStatus

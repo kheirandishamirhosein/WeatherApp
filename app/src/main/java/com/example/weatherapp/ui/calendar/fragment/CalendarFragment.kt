@@ -5,18 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.persianCalender.PersianCalendar
 import com.example.weatherapp.databinding.FragmentCalendarBinding
 import com.example.weatherapp.ui.calendar.viewmodel.CalendarViewModel
 import com.example.weatherapp.util.TimeFormatter
+import javax.inject.Inject
 
 class CalendarFragment : Fragment() {
 
     private lateinit var binding: FragmentCalendarBinding
-    private val calendarApiViewModel: CalendarViewModel by activityViewModels()
 
+    //private val calendarApiViewModel: CalendarViewModel by activityViewModels()
+    @Inject
+    lateinit var calendarApiViewModel: CalendarViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +31,7 @@ class CalendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        calendarApiViewModel = ViewModelProvider(this)[CalendarViewModel::class.java]
         binding.coLayout.visibility = View.GONE
         fetchCalendarViewModel()
     }
