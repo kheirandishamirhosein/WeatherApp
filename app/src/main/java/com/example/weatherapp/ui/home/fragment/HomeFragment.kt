@@ -16,12 +16,16 @@ import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.databinding.FragmentHomeBinding
 import com.example.weatherapp.ui.home.viewmodel.WeatherApiViewModel
 import com.example.weatherapp.util.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+@AndroidEntryPoint
+class HomeFragment: Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val weatherApiViewModel: WeatherApiViewModel by activityViewModels()
-    private lateinit var locationPermission: LocationPermission
+    @Inject
+    lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +38,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        locationPermission = LocationPermission(requireActivity())
+        //locationPermission = LocationPermission(requireActivity())
 
         if (weatherApiViewModel.currentWeatherStatus.value == null) {
             getCurrentLocation()

@@ -15,12 +15,16 @@ import com.example.weatherapp.databinding.FragmentAirPollutionBinding
 import com.example.weatherapp.ui.airPollution.viewmodel.AirPollutionViewModel
 import com.example.weatherapp.util.LocationPermission
 import com.google.android.gms.location.LocationServices
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class AirPollutionFragment : Fragment() {
 
     private lateinit var binding: FragmentAirPollutionBinding
     private val airPollutionWeatherApiViewModel: AirPollutionViewModel by viewModels()
-    private lateinit var locationPermission: LocationPermission
+    @Inject
+    lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

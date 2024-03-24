@@ -13,13 +13,17 @@ import com.example.weatherapp.databinding.FragmentFiveDayForcastBinding
 import com.example.weatherapp.ui.fiveforcast.adapter.ForecastListAdapter
 import com.example.weatherapp.ui.fiveforcast.viewmodel.FiveDayForecastViewModel
 import com.example.weatherapp.util.LocationPermission
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class FiveDayForecastFragment : Fragment() {
 
     private lateinit var binding: FragmentFiveDayForcastBinding
     lateinit var fiveDayForecastListAdapter: ForecastListAdapter
     private val fiveDayForecastWeatherApiViewModel: FiveDayForecastViewModel by viewModels()
-    private lateinit var locationPermission: LocationPermission
+    @Inject
+    lateinit var locationPermission: LocationPermission
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +36,7 @@ class FiveDayForecastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        locationPermission = LocationPermission(requireActivity())
+        //locationPermission = LocationPermission(requireActivity())
         getCurrentLocation()
         bindRecyclerview()
     }

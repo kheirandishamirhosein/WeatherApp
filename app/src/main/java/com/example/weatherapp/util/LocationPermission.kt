@@ -9,8 +9,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import javax.inject.Inject
 
-class LocationPermission(private val activity: Activity) {
+class LocationPermission @Inject constructor(private val activity: Activity) {
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 777

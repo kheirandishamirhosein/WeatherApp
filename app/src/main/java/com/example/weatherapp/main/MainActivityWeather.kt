@@ -15,21 +15,23 @@ import com.example.weatherapp.ui.fiveforcast.fragment.FiveDayForecastFragment
 import com.example.weatherapp.ui.home.fragment.HomeFragment
 import com.example.weatherapp.util.LocationPermission
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivityWeather : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWeatherBinding
-    private lateinit var locationPermission: LocationPermission
+    @Inject
+    lateinit var locationPermission: LocationPermission
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        locationPermission = LocationPermission(this)
+        //locationPermission = LocationPermission(this)
         if (locationPermission.checkLocationPermission()) {
-            Log.i("Location Permission" , locationPermission.checkLocationPermission().toString())
+            Log.i("Location Permission", locationPermission.checkLocationPermission().toString())
         } else {
             locationPermission.requestLocationPermission()
         }
