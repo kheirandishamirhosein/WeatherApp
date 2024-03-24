@@ -8,8 +8,9 @@ import com.example.weatherapp.data.api.GetApi
 import com.example.weatherapp.data.model.airPollution.AirPollution
 import com.example.weatherapp.util.UrlKeyApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AirPollutionViewModel : ViewModel() {
+class AirPollutionViewModel @Inject constructor() : ViewModel() {
     private val _airPollutionStatus = MutableLiveData<AirPollution>()
     val airPollutionStatus: LiveData<AirPollution> = _airPollutionStatus
 

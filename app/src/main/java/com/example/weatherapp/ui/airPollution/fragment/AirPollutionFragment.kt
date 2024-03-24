@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.weatherapp.R
 import com.example.weatherapp.data.model.airPollution.AirPollutionList
 import com.example.weatherapp.databinding.FragmentAirPollutionBinding
 import com.example.weatherapp.ui.airPollution.viewmodel.AirPollutionViewModel
 import com.example.weatherapp.util.LocationPermission
-import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,7 +21,8 @@ import javax.inject.Inject
 class AirPollutionFragment : Fragment() {
 
     private lateinit var binding: FragmentAirPollutionBinding
-    private val airPollutionWeatherApiViewModel: AirPollutionViewModel by viewModels()
+    @Inject
+    lateinit var airPollutionWeatherApiViewModel: AirPollutionViewModel
     @Inject
     lateinit var locationPermission: LocationPermission
 
@@ -37,7 +37,7 @@ class AirPollutionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        locationPermission = LocationPermission(requireActivity())
+        airPollutionWeatherApiViewModel = ViewModelProvider(this)[AirPollutionViewModel::class.java]
         getCurrentLocation()
         binding.scrollViewAirPollution.visibility = View.GONE
 

@@ -9,8 +9,9 @@ import com.example.weatherapp.data.model.forecastLocation.FiveForecastList
 import com.example.weatherapp.data.model.forecastLocation.FiveForecastWeatherModel
 import com.example.weatherapp.util.UrlKeyApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FiveDayForecastViewModel : ViewModel() {
+class FiveDayForecastViewModel @Inject constructor() : ViewModel() {
 
     private val _fiveDayForecastStatus = MutableLiveData <FiveForecastWeatherModel>()
     val fiveDayForecastStatus: LiveData <FiveForecastWeatherModel> = _fiveDayForecastStatus

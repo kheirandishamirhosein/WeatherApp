@@ -7,9 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.api.GetApi
 import com.example.weatherapp.data.model.currentLocation.WeatherModel
 import com.example.weatherapp.util.UrlKeyApi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherApiViewModel : ViewModel() {
+class WeatherApiViewModel @Inject constructor() : ViewModel() {
 
     //current Weather location Status LiveData
     private val _currentWeatherStatus = MutableLiveData<WeatherModel>()
