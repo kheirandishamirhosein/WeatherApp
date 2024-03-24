@@ -14,7 +14,9 @@ import com.example.weatherapp.ui.calendar.fragment.CalendarFragment
 import com.example.weatherapp.ui.fiveforcast.fragment.FiveDayForecastFragment
 import com.example.weatherapp.ui.home.fragment.HomeFragment
 import com.example.weatherapp.util.LocationPermission
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivityWeather : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainWeatherBinding

@@ -33,7 +33,7 @@ class LocationPermission(private val activity: Activity) {
     }
 
     //is Location Enabled(GPS_PROVIDER,NETWORK_PROVIDER)
-    fun isLocationEnabled(): Boolean {
+    private fun isLocationEnabled(): Boolean {
         val locationManager: LocationManager = activity.getSystemService(Context.LOCATION_SERVICE) as
                 LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
