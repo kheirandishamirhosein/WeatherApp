@@ -29,7 +29,6 @@ class MainActivityWeather : AppCompatActivity() {
         binding = ActivityMainWeatherBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //locationPermission = LocationPermission(this)
         if (locationPermission.checkLocationPermission()) {
             Log.i("Location Permission", locationPermission.checkLocationPermission().toString())
         } else {
@@ -53,17 +52,14 @@ class MainActivityWeather : AppCompatActivity() {
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("EXIT")
-        builder.setMessage("Are you sure to exit?")
-        builder.setPositiveButton("Yes") { _, _ ->
-            finish()
-            super.onBackPressed()
-        }
-        builder.setNegativeButton("No") { _, _ ->
-
-        }
-        builder.show()
+        AlertDialog.Builder(this)
+            .setTitle("Exit")
+            .setMessage("Are you sure to exit?")
+            .setPositiveButton("Yes") { _, _ ->
+                finishAffinity()
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     private fun loadFragment(fragment: Fragment) {
