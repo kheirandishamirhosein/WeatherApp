@@ -41,6 +41,9 @@ I used the following topics to make it :
 4. REST API
 5. Coroutine
 6. Permissions
+7. Clean Code
+8. Dagger Hilt
+9. Location
 ---------------
 Items
 1. home item (search all citys and current location)
