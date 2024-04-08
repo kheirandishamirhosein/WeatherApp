@@ -35,7 +35,8 @@ class ForecastListDiffCallback(
 
 }
 
-class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastViewHolder>() {
+class ForecastListAdapter(private val onClickListener: OnItemClickFiveForecast) : RecyclerView.Adapter<ForecastListAdapter
+.ForecastViewHolder>() {
 
     private var itemWeatherList = emptyList<FiveForecastList>()
 
@@ -63,22 +64,30 @@ class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastVie
         return itemWeatherList.size
     }
 
-    class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ForecastViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        lateinit var model: FiveForecastList
         private val tvTempForecast5Day: TextView = view.findViewById(R.id.tv_temp_forecast_5_day)
         private val tvWeatherTypeForecast5Day: TextView = view.findViewById(R.id.tv_weather_type_forecast_5_day)
         private val tvFeelsLikeForecast5Day: TextView = view.findViewById(R.id.tv_internal_parameter_forecast_5_day)
         private val tvDateTime: TextView = view.findViewById(R.id.tv_date_time)
         private val ivImagesForecast5Day: ImageView = view.findViewById(R.id.iv_images_forecast_5_day)
 
+        init {
+            itemView.setOnClickListener {
+                onClickListener.onItemClick(model)
+            }
+        }
+
         @SuppressLint("SetTextI18n")
-        fun bind(fiveForecastWeatherModel: FiveForecastList) {
+        fun bind(model: FiveForecastList) {
+            this.model = model
             tvTempForecast5Day.text =
-                "" + KelvinToCelsius.kelvinToCelsius(fiveForecastWeatherModel.main.temp) + ""
-            tvWeatherTypeForecast5Day.text = fiveForecastWeatherModel.weather[0].main
-            tvDateTime.text = fiveForecastWeatherModel.dt_txt
+                "" + KelvinToCelsius.kelvinToCelsius(model.main.temp) + ""
+            tvWeatherTypeForecast5Day.text = model.weather[0].main
+            tvDateTime.text = model.dt_txt
             tvFeelsLikeForecast5Day.text =
-                "Feels Like " + KelvinToCelsius.kelvinToCelsius(fiveForecastWeatherModel.main.feels_like) + ""
-            updateImageWeather(fiveForecastWeatherModel.weather[0].id)
+                "Feels Like " + KelvinToCelsius.kelvinToCelsius(model.main.feels_like) + ""
+            updateImageWeather(model.weather[0].id)
         }
 
         private fun updateImageWeather(id: Int) {
@@ -108,6 +117,10 @@ class ForecastListAdapter : RecyclerView.Adapter<ForecastListAdapter.ForecastVie
 
         }
 
+    }
+
+    interface OnItemClickFiveForecast {
+        fun onItemClick(model: FiveForecastList)
     }
 
 }

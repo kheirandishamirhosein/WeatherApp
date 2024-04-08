@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.R
+import com.example.weatherapp.data.model.forecastLocation.FiveForecastList
 import com.example.weatherapp.databinding.FragmentFiveDayForcastBinding
 import com.example.weatherapp.ui.fiveforcast.adapter.ForecastListAdapter
 import com.example.weatherapp.ui.fiveforcast.viewmodel.FiveDayForecastViewModel
@@ -17,12 +18,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class FiveDayForecastFragment : Fragment() {
+class FiveDayForecastFragment : Fragment(), ForecastListAdapter.OnItemClickFiveForecast {
 
     private lateinit var binding: FragmentFiveDayForcastBinding
-    lateinit var fiveDayForecastListAdapter: ForecastListAdapter
+    private lateinit var fiveDayForecastListAdapter: ForecastListAdapter
+
     @Inject
     lateinit var fiveDayForecastWeatherApiViewModel: FiveDayForecastViewModel
+
     @Inject
     lateinit var locationPermission: LocationPermission
 
@@ -45,7 +48,7 @@ class FiveDayForecastFragment : Fragment() {
     // bind recyclerview
     private fun bindRecyclerview() = with(binding) {
         forecast5DayRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-        fiveDayForecastListAdapter = ForecastListAdapter()
+        fiveDayForecastListAdapter = ForecastListAdapter(this@FiveDayForecastFragment)
         forecast5DayRecyclerview.adapter = fiveDayForecastListAdapter
     }
 
@@ -69,6 +72,11 @@ class FiveDayForecastFragment : Fragment() {
                 fetchCurrentLocationFiveDayForecastWeather(latitude.toString(), longitude.toString())
             }
         }
+    }
+
+
+    override fun onItemClick(model: FiveForecastList) {
+        Toast.makeText(context, "Item Clicked  !!!", Toast.LENGTH_SHORT).show()
     }
 
 }
